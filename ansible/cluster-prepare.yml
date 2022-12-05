@@ -1,0 +1,70 @@
+---
+- hosts: cluster
+  become: true
+  gather_facts: true
+  any_errors_fatal: true
+  tasks:
+    - name: Set same timezone on all nodes
+      community.general.timezone:
+        name: "{{ timezone | default('Etc/UTC') }}"
+
+    - name: Enable fstrim
+      ansible.builtin.systemd:
+        service: fstrim.timer
+        enabled: true
+
+    - name: Congigure sysctl parameters
+      ansible.posix.sysctl:
+        name: "{{ item.key }}"
+        value: "{{ item.value }}"
+        state: present
+        reload: true
+        sysctl_file: /etc/sysctl.d/99-kubernetes.conf
+      loop: "{{ sysctl_params | dict2items }}"
+      vars:
+        sysctl_params:
+          net.ipv4.ip_forward: 1
+          net.ipv6.conf.all.forwarding: 1
+          net.ipv6.conf.all.accept_ra: 2
+
+    - name: RedHat Specific Configs
+      block:
+        - name: Set SELinux to disabled state
+          ansible.posix.selinux:
+            state: disabled
+
+        - name: Add br_netfilter to /etc/modules-load.d/
+          ansible.builtin.copy:
+            content: "br_netfilter"
+            dest: /etc/modules-load.d/br_netfilter.conf
+            mode: "600"
+
+        - name: Load br_netfilter
+          community.general.modprobe:
+            name: br_netfilter
+            state: present
+
+        - name: Set bridge-nf-call-iptables (just to be sure)
+          ansible.posix.sysctl:
+            name: "{{ item }}"
+            value: "1"
+            state: present
+            reload: true
+            sysctl_file: /etc/sysctl.d/99-kubernetes.conf
+          loop:
+            - net.bridge.bridge-nf-call-iptables
+            - net.bridge.bridge-nf-call-ip6tables
+
+        - name: Add /usr/local/bin to sudo secure_path
+          ansible.builtin.lineinfile:
+            line: 'Defaults    secure_path = /sbin:/bin:/usr/sbin:/usr/bin:/usr/local/bin'
+            regexp: "Defaults(\\s)*secure_path(\\s)*="
+            state: present
+            insertafter: EOF
+            path: /etc/sudoers
+            validate: 'visudo -cf %s'
+      when: ansible_os_family == "RedHat"
+
+    - name: Reboot
+      ansible.builtin.reboot:
+        msg: Rebooting nodes
