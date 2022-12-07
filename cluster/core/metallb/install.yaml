@@ -6,7 +6,6 @@ metadata:
   namespace: metallb-system
 spec:
   interval: 30m
-  targetNamespace: metallb-system
   chart:
     spec:
       chart: metallb
