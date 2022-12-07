@@ -9,11 +9,9 @@ tasks:
       - flux check --pre
 
   sops:
-    desc: Install Flux into your cluster
+    desc: Install SOPS key into your cluster
     cmds:
       - cat {{.SOPS_AGE_KEY_FILE}} | kubectl -n flux-system create secret generic sops-age --from-file=age.agekey=/dev/stdin
-      - kubectl apply --kustomize {{.CLUSTER_DIR}}/flux/flux-system/
-      - task: reconcile
     preconditions:
       - sh: test -f {{.SOPS_AGE_KEY_FILE}}
         msg: |
