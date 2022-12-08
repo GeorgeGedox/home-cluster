@@ -6,3 +6,4 @@ resources:
   - chart-ingress-nginx.yaml
   - chart-metallb.yaml
   - chart-metrics-server.yaml
+  - chart-jetstack.yaml
