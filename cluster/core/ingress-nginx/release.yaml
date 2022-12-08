@@ -22,20 +22,29 @@ spec:
     controller:
       ingressClass: nginx
       replicaCount: 1
+      extraEnvs:
+        - name: TZ
+          value: "${TIMEZONE}"
       service:
         type: LoadBalancer
         loadBalancerIP: ${NIGNX_INGRESS_IP}
         externalIPs:
           - ${NIGNX_INGRESS_IP}
         externalTrafficPolicy: Local
+      publishService:
+        enabled: true
+      ingressClassResource:
+        default: true
       config:
         ssl-protocols: TLSv1.3 TLSv1.2
         proxy-body-size: 100m
         use-forwarded-headers: 'true'
+        enable-brotli: "true"
+        hsts-max-age: "31449600"
+        keep-alive: 120
+        keep-alive-requests: 10000
       metrics:
-        enabled: true
-        serviceMonitor:
-          enabled: true
+        enabled: false
       resources:
         requests:
           memory: 100Mi
