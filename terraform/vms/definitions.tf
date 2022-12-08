@@ -7,17 +7,17 @@ locals {
 
   vm_def_master = [
     {
-      ip     = "192.168.10.10"
+      ip     = "192.168.1.10"
       cores  = 2
       memory = 2048
     },
     {
-      ip     = "192.168.10.11"
+      ip     = "192.168.1.11"
       cores  = 2
       memory = 2048
     },
     {
-      ip     = "192.168.10.12"
+      ip     = "192.168.1.12"
       cores  = 2
       memory = 2048
     }
@@ -25,12 +25,12 @@ locals {
 
   vm_def_worker = [
     {
-      ip     = "192.168.10.20"
+      ip     = "192.168.1.20"
       cores  = 2
       memory = 2048
     },
     {
-      ip     = "192.168.10.21"
+      ip     = "192.168.1.21"
       cores  = 2
       memory = 2048
     }

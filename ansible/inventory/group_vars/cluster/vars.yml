@@ -1,10 +1,10 @@
 ---
 # (string) The ARP address kube-vip broadcasts
 # Used to load balance control plane nodes
-kubevip_address: "192.168.10.1"
+kubevip_address: "192.168.1.1"
 
 # CIDR used for calico installation of where to look for nodes
-calico_cidr: "192.168.10.0/24"
+calico_cidr: "192.168.1.0/24"
 
 # (string) Timezone for the servers
 timezone: "Europe/Bucharest"
