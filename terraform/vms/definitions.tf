@@ -25,12 +25,12 @@ locals {
 
   vm_def_worker = [
     {
-      ip     = "192.168.10.50"
+      ip     = "192.168.10.20"
       cores  = 2
       memory = 2048
     },
     {
-      ip     = "192.168.10.51"
+      ip     = "192.168.10.21"
       cores  = 2
       memory = 2048
     }

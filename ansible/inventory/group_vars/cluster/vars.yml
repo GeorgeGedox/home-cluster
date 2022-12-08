@@ -1,7 +1,7 @@
 ---
 # (string) The ARP address kube-vip broadcasts
 # Used to load balance control plane nodes
-kubevip_address: "192.168.10.10"
+kubevip_address: "192.168.10.1"
 
 # CIDR used for calico installation of where to look for nodes
 calico_cidr: "192.168.10.0/24"
@@ -30,7 +30,7 @@ k3s_registration_address: "{{ kubevip_address }}"
 # (list) A list of URLs to deploy on the primary control plane. Read notes below.
 k3s_server_manifests_urls:
   # https://github.com/projectcalico/calico/issues/7003
-  - url: https://raw.githubusercontent.com/projectcalico/calico/v3.24.2/manifests/tigera-operator.yaml
+  - url: https://raw.githubusercontent.com/projectcalico/calico/v3.24.5/manifests/tigera-operator.yaml
     filename: tigera-operator.yaml
   - url: https://kube-vip.io/manifests/rbac.yaml
     filename: kube-vip-rbac.yaml

@@ -18,3 +18,4 @@ terraform.tfstate*
 megalinter-reports
 # Python venv
 .venv
+test.yaml
