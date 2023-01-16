@@ -7,3 +7,4 @@ resources:
   - metrics-server
   - cert-manager
   - ingress-nginx
+  - system-upgrade
