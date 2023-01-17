@@ -7,4 +7,4 @@ metadata:
 spec:
   type: discord
   secretRef:
-    name: SECRET_FLUX_DISCORD_WEBHOOK
+    name: discord-webhook-flux
