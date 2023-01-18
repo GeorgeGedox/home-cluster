@@ -13,7 +13,21 @@
         service: fstrim.timer
         enabled: true
 
-    - name: Congigure sysctl parameters
+    - name: Install packages
+      block:
+        - name: Install required packages
+          ansible.builtin.apt:
+            name: "{{ apt_packages | default([]) }}"
+            state: present
+            update_cache: true
+        - name: Remove leaf packages
+          ansible.builtin.apt:
+            autoremove: true
+      when: ansible_facts['distribution'] == 'Ubuntu'
+      tags:
+        - packages
+
+    - name: Configure sysctl parameters
       ansible.posix.sysctl:
         name: "{{ item.key }}"
         value: "{{ item.value }}"

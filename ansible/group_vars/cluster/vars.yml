@@ -9,6 +9,12 @@ calico_cidr: "192.168.1.0/24"
 # (string) Timezone for the servers
 timezone: "Europe/Bucharest"
 
+apt_packages:
+  - htop
+  - lm-sensors
+  - nfs-common
+  - python3-yaml
+
 #
 # Below vars are for the xanmanning.k3s role
 # https://github.com/PyratLabs/ansible-role-k3s
