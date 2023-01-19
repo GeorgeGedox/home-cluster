@@ -8,3 +8,4 @@ resources:
   - cert-manager
   - ingress-nginx
   - system-upgrade
+  - longhorn-system
