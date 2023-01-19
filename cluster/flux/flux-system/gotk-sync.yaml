@@ -6,7 +6,7 @@ metadata:
   name: flux-system
   namespace: flux-system
 spec:
-  interval: 5m
+  interval: 2m30s
   ref:
     branch: master
   url: http://github.com/GeorgeGedox/home-cluster
@@ -17,7 +17,7 @@ metadata:
   name: flux-system
   namespace: flux-system
 spec:
-  interval: 15m
+  interval: 5m
   path: ./cluster/flux
   prune: true
   sourceRef:
