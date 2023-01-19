@@ -7,3 +7,4 @@ resources:
   - chart-metallb.yaml
   - chart-metrics-server.yaml
   - chart-jetstack.yaml
+  - chart-longhorn.yaml
