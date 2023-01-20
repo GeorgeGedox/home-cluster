@@ -1,0 +1,35 @@
+---
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: GitRepository
+metadata:
+  name: flux-repo
+  namespace: flux-system
+spec:
+  interval: 6h
+  url: https://github.com/fluxcd/flux2
+  ref:
+    tag: v0.38.3
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+kind: Kustomization
+metadata:
+  name: flux-install
+  namespace: flux-system
+spec:
+  interval: 3h
+  path: ./manifests/install
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: flux-repo
+  patches:
+    - patch: |
+        - op: add
+          path: /spec/template/spec/containers/0/args/-
+          value: --concurrent=20
+        - op: add
+          path: /spec/template/spec/containers/0/args/-
+          value: --requeue-dependency=5s
+      target:
+        kind: Deployment
+        name: "(kustomize-controller|helm-controller|source-controller)"
