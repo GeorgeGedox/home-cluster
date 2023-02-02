@@ -74,7 +74,7 @@ resource "proxmox_vm_qemu" "cluster_worker" {
 
   disk {
     storage = "ssd"
-    size    = try(each.value.disk_size, "32G")
+    size    = try(each.value.disk_size, "20G")
     type    = "scsi"
     ssd     = 1
     discard = "on"

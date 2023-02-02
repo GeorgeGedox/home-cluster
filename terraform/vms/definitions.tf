@@ -1,6 +1,6 @@
 locals {
   proxmox_target_node     = "epsilon"
-  template_name           = "ubuntu-2204-template"
+  template_name           = "debian-11-template"
   network_gateway         = "192.168.0.1"
   vm_master_starting_vmid = 500
   vm_worker_starting_vmid = 550
