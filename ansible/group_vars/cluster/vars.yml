@@ -14,6 +14,7 @@ apt_packages:
   - lm-sensors
   - nfs-common
   - python3-yaml
+  - python3-kubernetes
 
 #
 # Below vars are for the xanmanning.k3s role
