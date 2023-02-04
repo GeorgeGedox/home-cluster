@@ -13,6 +13,7 @@ apt_packages:
   - htop
   - lm-sensors
   - nfs-common
+  - open-iscsi
   - python3-yaml
   - python3-kubernetes
 
