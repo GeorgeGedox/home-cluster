@@ -5,13 +5,14 @@ metadata:
   name: core
   namespace: flux-system
 spec:
-  interval: 30m
+  interval: 10m
   path: ./cluster/core
   prune: true
   sourceRef:
     kind: GitRepository
     name: flux-system
   dependsOn:
+    - name: charts
     - name: config
   decryption:
     provider: sops

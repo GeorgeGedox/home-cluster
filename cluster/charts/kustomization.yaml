@@ -8,3 +8,4 @@ resources:
   - chart-metrics-server.yaml
   - chart-jetstack.yaml
   - chart-longhorn.yaml
+  - chart-prometheus-community.yaml
