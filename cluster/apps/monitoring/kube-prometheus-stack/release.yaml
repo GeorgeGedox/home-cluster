@@ -25,6 +25,7 @@ spec:
     cleanupOnFail: true
     remediation:
       retries: 5
+      remediateLastFailure: true
   dependsOn:
     - name: longhorn
       namespace: longhorn-system
@@ -35,11 +36,9 @@ spec:
     kubeApiServer:
       enabled: true
 
-    kubeControllerManager:
-      enabled: false
-
     kubeEtcd:
       enabled: true
+      endpoints: ["192.168.1.10", "192.168.1.11", "192.168.1.12"]
 
     kubelet:
       enabled: false
@@ -47,11 +46,16 @@ spec:
     kubeProxy:
       enabled: false
 
-    kubeScheduler:
-      enabled: false
-
     kubeStateMetrics:
       enabled: true
+
+    kubeControllerManager:
+      enabled: true
+      endpoints: ["192.168.1.10", "192.168.1.11", "192.168.1.12"]
+
+    kubeScheduler:
+      enabled: true
+      endpoints: ["192.168.1.10", "192.168.1.11", "192.168.1.12"]
 
     kube-state-metrics:
       metricLabelsAllowlist:
