@@ -9,17 +9,17 @@ locals {
     {
       ip     = "192.168.1.10"
       cores  = 2
-      memory = 2048
+      memory = 4096
     },
     {
       ip     = "192.168.1.11"
       cores  = 2
-      memory = 2048
+      memory = 4096
     },
     {
       ip     = "192.168.1.12"
       cores  = 2
-      memory = 2048
+      memory = 4096
     }
   ]
 
@@ -27,12 +27,12 @@ locals {
     {
       ip     = "192.168.1.20"
       cores  = 2
-      memory = 2048
+      memory = 4096
     },
     {
       ip     = "192.168.1.21"
       cores  = 2
-      memory = 2048
+      memory = 4096
     }
   ]
 }
