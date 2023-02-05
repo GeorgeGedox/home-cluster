@@ -1,0 +1,150 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: kube-prometheus-stack
+  namespace: monitoring
+spec:
+  interval: 30m
+  timeout: 20m
+  chart:
+    spec:
+      chart: kube-prometheus-stack
+      version: 44.3.1
+      sourceRef:
+        kind: HelmRepository
+        name: chart-prometheus-community
+        namespace: flux-system
+  install:
+    crds: CreateReplace
+    createNamespace: true
+    remediation:
+      retries: 5
+  upgrade:
+    crds: CreateReplace
+    cleanupOnFail: true
+    remediation:
+      retries: 5
+  dependsOn:
+    - name: longhorn
+      namespace: longhorn-system
+  values:
+    ###
+    ### Component values
+    ###
+    kubeApiServer:
+      enabled: true
+
+    kubeControllerManager:
+      enabled: false
+
+    kubeEtcd:
+      enabled: true
+
+    kubelet:
+      enabled: false
+
+    kubeProxy:
+      enabled: false
+
+    kubeScheduler:
+      enabled: false
+
+    kubeStateMetrics:
+      enabled: true
+
+    kube-state-metrics:
+      metricLabelsAllowlist:
+        - 'persistentvolumeclaims=[*]'
+      prometheus:
+        monitor:
+          enabled: true
+          relabelings:
+            - action: replace
+              regex: (.*)
+              replacement: $1
+              sourceLabels:
+                - __meta_kubernetes_pod_node_name
+              targetLabel: kubernetes_node
+
+    grafana:
+      enabled: false
+      forceDeployDashboards: true
+      sidecar:
+        dashboards:
+          multicluster:
+            etcd:
+              enabled: true
+
+    nodeExporter:
+      enabled: true
+
+    prometheus-node-exporter:
+      prometheus:
+        monitor:
+          enabled: true
+          relabelings:
+            - action: replace
+              regex: (.*)
+              replacement: $1
+              sourceLabels:
+                - __meta_kubernetes_pod_node_name
+              targetLabel: kubernetes_node
+
+    ###
+    ### Prometheus instance values
+    ###
+    prometheus:
+      ingress:
+        enabled: true
+        ingressClassName: nginx
+        pathType: Prefix
+        hosts:
+          - prometheus.${SECRET_LAN_DOMAIN}
+
+      prometheusSpec:
+        additionalScrapeConfigs:
+          - job_name: node-exporter
+            scrape_interval: 1m
+            scrape_timeout: 10s
+            honor_timestamps: true
+        enableAdminAPI: true
+        podMonitorSelectorNilUsesHelmValues: false
+        probeSelectorNilUsesHelmValues: false
+        ruleSelectorNilUsesHelmValues: false
+        serviceMonitorSelectorNilUsesHelmValues: false
+        walCompression: true
+        retention: 2d
+        retentionSize: "6GB"
+        storageSpec:
+          volumeClaimTemplate:
+            spec:
+              storageClassName: longhorn
+              resources:
+                requests:
+                  storage: 10Gi
+
+      thanosService:
+        enabled: false
+
+      thanosServiceMonitor:
+        enabled: false
+
+    ###
+    ### Alertmanager values
+    ###
+    alertmanager:
+      ingress:
+        enabled: true
+        pathType: Prefix
+        ingressClassName: nginx
+        hosts:
+          - alertmanager.${SECRET_LAN_DOMAIN}
+      alertmanagerSpec:
+        storage:
+          volumeClaimTemplate:
+            spec:
+              storageClassName: longhorn
+              resources:
+                requests:
+                  storage: 1Gi
