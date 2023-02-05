@@ -10,3 +10,4 @@ resources:
   - chart-longhorn.yaml
   - chart-prometheus-community.yaml
   - chart-hajimari.yaml
+  - chart-fairwinds.yaml
