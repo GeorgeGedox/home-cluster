@@ -25,6 +25,8 @@ spec:
   uninstall:
     keepHistory: false
   values:
+    vpa:
+      enabled: true
     controller:
       resources:
         requests:

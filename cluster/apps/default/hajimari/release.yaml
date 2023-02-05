@@ -30,7 +30,15 @@ spec:
 
     hajimari:
       title: Apps
+      lightTheme: passion
+      darkTheme: chalk
       alwaysTargetBlank: true
+      showGreeting: false
+      showAppGroups: false
+      showAppStatus: false
+      showBookmarkGroups: false
+      showGlobalBookmarks: false
+      showAppUrls: false
       defaultEnable: true
       namespaceSelector:
         matchNames:
