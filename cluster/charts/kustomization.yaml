@@ -9,3 +9,4 @@ resources:
   - chart-jetstack.yaml
   - chart-longhorn.yaml
   - chart-prometheus-community.yaml
+  - chart-hajimari.yaml
