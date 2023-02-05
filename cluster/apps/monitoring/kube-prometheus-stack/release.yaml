@@ -30,60 +30,24 @@ spec:
     - name: longhorn
       namespace: longhorn-system
   values:
-    ###
-    ### Component values
-    ###
-    kubeApiServer:
-      enabled: true
-
-    kubeEtcd:
-      enabled: true
-      endpoints: ["192.168.1.10", "192.168.1.11", "192.168.1.12"]
-
-    kubelet:
-      enabled: false
-
     kubeProxy:
       enabled: false
-
-    kubeStateMetrics:
-      enabled: true
-
     kubeControllerManager:
       enabled: true
       endpoints: ["192.168.1.10", "192.168.1.11", "192.168.1.12"]
-
     kubeScheduler:
       enabled: true
       endpoints: ["192.168.1.10", "192.168.1.11", "192.168.1.12"]
-
-    kube-state-metrics:
-      metricLabelsAllowlist:
-        - 'persistentvolumeclaims=[*]'
-      prometheus:
-        monitor:
-          enabled: true
-          relabelings:
-            - action: replace
-              regex: (.*)
-              replacement: $1
-              sourceLabels:
-                - __meta_kubernetes_pod_node_name
-              targetLabel: kubernetes_node
-
     grafana:
       enabled: false
       forceDeployDashboards: true
-      sidecar:
-        dashboards:
-          multicluster:
-            etcd:
-              enabled: true
-
     nodeExporter:
       enabled: true
-
     prometheus-node-exporter:
+      resources:
+        requests:
+          cpu: 23m
+          memory: 64M
       prometheus:
         monitor:
           enabled: true
@@ -94,10 +58,6 @@ spec:
               sourceLabels:
                 - __meta_kubernetes_pod_node_name
               targetLabel: kubernetes_node
-
-    ###
-    ### Prometheus instance values
-    ###
     prometheus:
       ingress:
         enabled: true
@@ -108,13 +68,7 @@ spec:
           hajimari.io/icon: simple-icons:prometheus
         hosts:
           - prometheus.${SECRET_LAN_DOMAIN}
-
       prometheusSpec:
-        additionalScrapeConfigs:
-          - job_name: node-exporter
-            scrape_interval: 1m
-            scrape_timeout: 10s
-            honor_timestamps: true
         enableAdminAPI: true
         podMonitorSelectorNilUsesHelmValues: false
         probeSelectorNilUsesHelmValues: false
@@ -130,16 +84,6 @@ spec:
               resources:
                 requests:
                   storage: 10Gi
-
-      thanosService:
-        enabled: false
-
-      thanosServiceMonitor:
-        enabled: false
-
-    ###
-    ### Alertmanager values
-    ###
     alertmanager:
       ingress:
         enabled: true
