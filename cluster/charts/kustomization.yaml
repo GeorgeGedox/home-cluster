@@ -11,3 +11,4 @@ resources:
   - chart-prometheus-community.yaml
   - chart-hajimari.yaml
   - chart-fairwinds.yaml
+  - chart-stakater.yaml

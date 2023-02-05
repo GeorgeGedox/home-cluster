@@ -8,3 +8,4 @@ resources:
   - ingress-nginx
   - system-upgrade
   - longhorn-system
+  - reloader

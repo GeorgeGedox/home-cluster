@@ -27,7 +27,6 @@ spec:
   values:
     env:
       TZ: ${TIMEZONE}
-
     hajimari:
       title: Apps
       lightTheme: passion
@@ -46,7 +45,6 @@ spec:
           - flux-system
           - monitoring
           - longhorn-system
-
     ingress:
       main:
         enabled: true
@@ -58,13 +56,16 @@ spec:
             paths:
               - path: /
                 pathType: Prefix
-
     persistence:
       data:
         enabled: true
         type: emptyDir
-
+    podAnnotations:
+      configmap.reloader.stakater.com/reload: hajimari-settings
     resources:
       requests:
-        cpu: 100m
-        memory: 128M
+        cpu: 15m
+        memory: 105M
+      limits:
+        cpu: 15m
+        memory: 105M
