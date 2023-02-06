@@ -12,3 +12,4 @@ resources:
   - chart-hajimari.yaml
   - chart-fairwinds.yaml
   - chart-stakater.yaml
+  - chart-grafana.yaml
