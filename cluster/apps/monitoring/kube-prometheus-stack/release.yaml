@@ -48,6 +48,7 @@ spec:
       enabled: false
     grafana:
       enabled: false
+      forceDeployDashboards: true
     nodeExporter:
       enabled: true
     prometheusOperator:
