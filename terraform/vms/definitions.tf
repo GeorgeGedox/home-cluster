@@ -13,20 +13,20 @@ locals {
     },
     {
       ip     = "192.168.1.11"
-      cores  = 2
-      memory = 6144
+      cores  = 4
+      memory = 8192
     },
     {
       ip     = "192.168.1.12"
       cores  = 2
-      memory = 6144
+      memory = 8192
     }
   ]
 
   vm_def_worker = [
     {
       ip     = "192.168.1.20"
-      cores  = 2
+      cores  = 4
       memory = 8192
     },
     {
