@@ -36,9 +36,22 @@ spec:
       repository: ghcr.io/onedr0p/alpine
       tag: 3.17.1
     command: ["/bin/bash", "/app/cloudflare-ddns.sh"]
-    envFrom:
-      - secretRef:
-          name: cloudflare-ddns-secrets
+    env:
+      - name: CLOUDFLARE_EMAIL
+        valueFrom:
+          secretKeyRef:
+            name: cluster-secrets
+            key: SECRET_CLOUDFLARE_EMAIL
+      - name: CLOUDFLARE_APIKEY
+        valueFrom:
+          secretKeyRef:
+            name: cluster-secrets
+            key: SECRET_CLOUDFLARE_EMAIL
+      - name: CLOUDFLARE_RECORD_NAME
+        valueFrom:
+          secretKeyRef:
+            name: cluster-secrets
+            key: CLOUDFLARE_DDNS_RECORD
     service:
       main:
         enabled: false

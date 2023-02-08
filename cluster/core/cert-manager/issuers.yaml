@@ -14,7 +14,7 @@ spec:
           cloudflare:
             email: "${SECRET_CLOUDFLARE_EMAIL}"
             apiKeySecretRef:
-              name: cloudflare-cert-manager-secrets
+              name: cluster-secrets
               key: CLOUDFLARE_APIKEY
         selector:
           dnsZones:
@@ -35,7 +35,7 @@ spec:
           cloudflare:
             email: "${SECRET_CLOUDFLARE_EMAIL}"
             apiKeySecretRef:
-              name: cloudflare-cert-manager-secrets
+              name: cluster-secrets
               key: CLOUDFLARE_APIKEY
         selector:
           dnsZones:

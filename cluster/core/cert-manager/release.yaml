@@ -14,10 +14,20 @@ spec:
         kind: HelmRepository
         name: chart-jetstack
         namespace: flux-system
+  maxHistory: 3
   install:
     createNamespace: true
     remediation:
-      retries: 5
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  uninstall:
+    keepHistory: false
+  dependsOn:
+    - name: reflector
+      namespace: kube-system
   values:
     installCRDs: true
     webhook:
