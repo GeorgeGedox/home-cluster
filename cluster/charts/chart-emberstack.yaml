@@ -2,8 +2,8 @@
 apiVersion: source.toolkit.fluxcd.io/v1beta2
 kind: HelmRepository
 metadata:
-  name: chart-external-secrets
+  name: chart-emberstack
   namespace: flux-system
 spec:
   interval: 1h
-  url: https://charts.external-secrets.io
+  url: https://emberstack.github.io/helm-charts
