@@ -13,3 +13,4 @@ resources:
   - chart-fairwinds.yaml
   - chart-stakater.yaml
   - chart-grafana.yaml
+  - chart-bjw.yaml
