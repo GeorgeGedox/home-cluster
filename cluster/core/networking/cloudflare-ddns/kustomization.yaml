@@ -4,3 +4,11 @@ kind: Kustomization
 resources:
   - secrets.sops.yaml
   - release.yaml
+configMapGenerator:
+  - name: cloudflare-ddns-configmap
+    files:
+      - ./cloudflare-ddns.sh
+generatorOptions:
+  disableNameSuffixHash: true
+  annotations:
+    kustomize.toolkit.fluxcd.io/substitute: disabled
