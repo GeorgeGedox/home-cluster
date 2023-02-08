@@ -14,3 +14,4 @@ resources:
   - chart-stakater.yaml
   - chart-grafana.yaml
   - chart-bjw.yaml
+  - chart-external-secrets.yaml
