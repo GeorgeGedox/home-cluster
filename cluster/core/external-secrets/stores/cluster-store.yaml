@@ -11,3 +11,7 @@ spec:
           type: ConfigMap
           name: kube-root-ca.crt
           key: ca.crt
+      auth:
+        serviceAccount:
+          name: external-secrets-account
+          namespace: flux-system

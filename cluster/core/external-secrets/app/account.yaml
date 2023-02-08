@@ -1,0 +1,39 @@
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: external-secrets-role
+  namespace: flux-system
+rules:
+  - apiGroups: [""]
+    resources:
+      - secrets
+    verbs:
+      - get
+      - list
+      - watch
+  - apiGroups:
+      - authorization.k8s.io
+    resources:
+      - selfsubjectrulesreviews
+    verbs:
+      - create
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: external-secrets-account
+  namespace: flux-system
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: es-account-binding
+  namespace: flux-system
+roleRef:
+  name: external-secrets-role
+  kind: Role
+  apiGroup: ""
+subjects:
+  - kind: ServiceAccount
+    name: external-secrets-account
