@@ -46,7 +46,7 @@ spec:
         valueFrom:
           secretKeyRef:
             name: cluster-secrets
-            key: SECRET_CLOUDFLARE_EMAIL
+            key: CLOUDFLARE_APIKEY
       - name: CLOUDFLARE_RECORD_NAME
         valueFrom:
           secretKeyRef:
