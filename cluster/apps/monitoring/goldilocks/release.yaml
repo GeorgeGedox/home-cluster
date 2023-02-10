@@ -41,7 +41,10 @@ spec:
           hajimari.io/appName: Goldilocks
           hajimari.io/icon: mdi:align-vertical-top
         hosts:
-          - &host goldilocks.${SECRET_DOMAIN}
+          - host: &host goldilocks.${SECRET_DOMAIN}
+            paths:
+              - path: /
+                type: Prefix
         tls:
           - hosts:
               - *host
