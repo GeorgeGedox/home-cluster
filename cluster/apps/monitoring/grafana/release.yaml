@@ -40,7 +40,7 @@ spec:
       existingSecret: grafana-admin
     grafana.ini:
       server:
-        root_url: "http://grafana.${SECRET_LAN_DOMAIN}"
+        root_url: "http://grafana.${SECRET_DOMAIN}"
       paths:
         data: /var/lib/grafana/data
         logs: /var/log/grafana
@@ -113,7 +113,8 @@ spec:
       annotations:
         hajimari.io/appName: Grafana
         hajimari.io/icon: simple-icons:grafana
+        external-dns.alpha.kubernetes.io/target: "${CLOUDFLARE_DDNS_RECORD}"
       hosts:
-        - grafana.${SECRET_LAN_DOMAIN}
+        - grafana.${SECRET_DOMAIN}
     persistence:
       enabled: false
