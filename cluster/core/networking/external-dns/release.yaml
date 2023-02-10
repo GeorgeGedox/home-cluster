@@ -28,7 +28,6 @@ spec:
   values:
     interval: 2m
     provider: cloudflare
-    logLevel: debug
     env:
       - name: CF_API_EMAIL
         valueFrom:
