@@ -29,7 +29,9 @@ spec:
     fullnameOverride: k8s-gateway
     domain: "${SECRET_DOMAIN}"
     ttl: 30
-    extraZonePlugins: "forward . 1.1.1.1:53 8.8.8.8:53"
+    extraZonePlugins:
+      - name: forward
+        parameters: ". 1.1.1.1:53 8.8.8.8:53"
     fallthrough:
       enabled: true
     service:
