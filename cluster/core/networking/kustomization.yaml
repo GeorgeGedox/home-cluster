@@ -6,3 +6,4 @@ resources:
   - ingress-nginx
   - k8s-gateway
   - cloudflare-ddns
+  - external-dns
