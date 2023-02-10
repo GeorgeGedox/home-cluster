@@ -25,6 +25,9 @@ spec:
       retries: 3
   uninstall:
     keepHistory: false
+  dependsOn:
+    - name: cert-manager
+      namespace: cert-manager
   values:
     controller:
       ingressClass: nginx
@@ -61,6 +64,8 @@ spec:
           "path": "$uri", "request_query": "$args", "request_length": $request_length,
           "duration": $request_time,"method": "$request_method", "http_referrer": "$http_referer",
           "http_user_agent": "$http_user_agent"}
+      extraArgs:
+        default-ssl-certificate: "networking/${SECRET_DOMAIN/./-}-staging-tls"
       metrics:
         enabled: false
       resources:
