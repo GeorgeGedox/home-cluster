@@ -27,7 +27,7 @@ spec:
     keepHistory: false
   values:
     fullnameOverride: k8s-gateway
-    domain: "int.${SECRET_DOMAIN}"
+    domain: "${SECRET_DOMAIN}"
     ttl: 30
     service:
       type: LoadBalancer
