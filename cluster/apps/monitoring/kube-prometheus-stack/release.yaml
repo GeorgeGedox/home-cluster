@@ -86,7 +86,10 @@ spec:
           hajimari.io/appName: Prometheus
           hajimari.io/icon: simple-icons:prometheus
         hosts:
-          - prometheus.${SECRET_LAN_DOMAIN}
+          - &pmhost prometheus.${SECRET_DOMAIN}
+        tls:
+          - hosts:
+              - *pmhost
       prometheusSpec:
         enableAdminAPI: true
         podMonitorSelectorNilUsesHelmValues: false
@@ -168,7 +171,10 @@ spec:
           hajimari.io/appName: "Alert Manager"
           hajimari.io/icon: mdi:alert-decagram-outline
         hosts:
-          - alertmanager.${SECRET_LAN_DOMAIN}
+          - &amhost alertmanager.${SECRET_DOMAIN}
+        tls:
+          - hosts:
+              - *amhost
       alertmanagerSpec:
         resources:
           requests:

@@ -52,10 +52,13 @@ spec:
         annotations:
           hajimari.io/enable: "false"
         hosts:
-          - host: apps.${SECRET_LAN_DOMAIN}
+          - host: apps.${SECRET_DOMAIN}
             paths:
               - path: /
                 pathType: Prefix
+        tls:
+          - hosts:
+              - *host
     persistence:
       data:
         enabled: true

@@ -41,10 +41,10 @@ spec:
           hajimari.io/appName: Goldilocks
           hajimari.io/icon: mdi:align-vertical-top
         hosts:
-          - host: goldilocks.${SECRET_LAN_DOMAIN}
-            paths:
-              - path: /
-                type: Prefix
+          - &host goldilocks.${SECRET_DOMAIN}
+        tls:
+          - hosts:
+              - *host
       resources:
         requests:
           cpu: 15m
