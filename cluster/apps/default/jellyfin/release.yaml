@@ -34,6 +34,14 @@ spec:
     env:
       TZ: ${TIMEZONE}
       DOTNET_SYSTEM_IO_DISABLEFILELOCKING: "true"
+    podSecurityContext:
+      runAsUser: 568
+      runAsGroup: 568
+      fsGroup: 568
+      fsGroupChangePolicy: "OnRootMismatch"
+      supplementalGroups:
+        - 44
+        - 109
     service:
       main:
         type: ClusterIP
