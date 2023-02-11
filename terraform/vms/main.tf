@@ -28,7 +28,7 @@ resource "proxmox_vm_qemu" "cluster_master" {
   cores     = try(each.value.cores, 1)
   sockets   = try(each.value.sockets, 1)
   memory    = try(each.value.memory, 1024)
-  ipconfig0 = "ip=${each.value.ip}/8,gw=${local.network_gateway}"
+  ipconfig0 = "ip=${each.value.ip}/${local.network_subnet_range},gw=${local.network_gateway}"
 
   ciuser  = data.sops_file.vms_secrets.data["vm_cloudinit_user"]
   sshkeys = chomp(data.http.github_keys.response_body)
@@ -40,7 +40,7 @@ resource "proxmox_vm_qemu" "cluster_master" {
 
   disk {
     storage = "ssd"
-    size    = try(each.value.disk_size, "32G")
+    size    = try(each.value.disk_size, "20G")
     type    = "scsi"
     ssd     = 1
     discard = "on"
@@ -62,7 +62,7 @@ resource "proxmox_vm_qemu" "cluster_worker" {
   cores     = try(each.value.cores, 1)
   sockets   = try(each.value.sockets, 1)
   memory    = try(each.value.memory, 1024)
-  ipconfig0 = "ip=${each.value.ip}/8,gw=${local.network_gateway}"
+  ipconfig0 = "ip=${each.value.ip}/${local.network_subnet_range},gw=${local.network_gateway}"
 
   ciuser  = data.sops_file.vms_secrets.data["vm_cloudinit_user"]
   sshkeys = chomp(data.http.github_keys.response_body)
