@@ -30,6 +30,10 @@ spec:
   values:
     strategy:
       type: Recreate
+    env:
+      variables:
+        - name: PGADMIN_CONFIG_SERVER_MODE
+          value: "False"
     serverDefinitions:
       enabled: true
       servers:
