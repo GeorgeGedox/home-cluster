@@ -11,19 +11,19 @@ locals {
       ip        = "192.168.1.10"
       cores     = 2
       memory    = 8192
-      disk_size = "20G"
+      disk_size = "40G"
     },
     {
       ip        = "192.168.1.11"
       cores     = 4
       memory    = 8192
-      disk_size = "20G"
+      disk_size = "40G"
     },
     {
       ip        = "192.168.1.12"
       cores     = 2
       memory    = 8192
-      disk_size = "20G"
+      disk_size = "40G"
     }
   ]
 
@@ -32,13 +32,13 @@ locals {
       ip        = "192.168.1.20"
       cores     = 4
       memory    = 8192
-      disk_size = "30G"
+      disk_size = "40G"
     },
     {
       ip        = "192.168.1.21"
       cores     = 2
       memory    = 8192
-      disk_size = "30G"
+      disk_size = "40G"
     }
   ]
 }
