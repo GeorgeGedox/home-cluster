@@ -32,7 +32,12 @@ spec:
       type: Recreate
     env:
       variables:
+        # DO NOT DO THIS IF YOU DON'T KNOW WHAT YOU'RE DOING
+        # This will disable web login and the master password pop-up
+        # I do this because this is not exposed outside my LAN
         - name: PGADMIN_CONFIG_SERVER_MODE
+          value: "False"
+        - name: MASTER_PASSWORD_REQUIRED
           value: "False"
     serverDefinitions:
       enabled: true
