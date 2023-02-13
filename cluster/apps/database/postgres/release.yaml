@@ -38,8 +38,7 @@ spec:
     primary:
       persistence:
         enabled: true
-        storageClass: longhorn
-        size: 2Gi
+        existingClaim: postgresql-data
     metrics:
       enabled: true
       serviceMonitor:
