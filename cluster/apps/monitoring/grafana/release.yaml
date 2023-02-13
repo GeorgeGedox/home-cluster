@@ -79,6 +79,10 @@ spec:
           gnetId: 1860
           revision: 29
           datasource: Prometheus
+        postgresql:
+          gnetId: 9628
+          revision: 7
+          datasource: Prometheus
         kubernetes-global:
           url: https://raw.githubusercontent.com/dotdc/grafana-dashboards-kubernetes/master/dashboards/k8s-views-global.json
           datasource: Prometheus
