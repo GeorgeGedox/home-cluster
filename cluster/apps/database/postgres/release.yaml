@@ -34,6 +34,7 @@ spec:
     auth:
       enablePostgresUser: true
       postgresPassword: ${SECRET_POSTGRES_ADMIN_PASS}
+      database: postgres
     primary:
       persistence:
         enabled: true
