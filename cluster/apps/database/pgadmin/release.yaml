@@ -37,7 +37,7 @@ spec:
         # I do this because this is not exposed outside my LAN
         - name: PGADMIN_CONFIG_SERVER_MODE
           value: "False"
-        - name: MASTER_PASSWORD_REQUIRED
+        - name: PGADMIN_CONFIG_MASTER_PASSWORD_REQUIRED
           value: "False"
     serverDefinitions:
       enabled: true
