@@ -40,6 +40,8 @@ spec:
       showGlobalBookmarks: false
       showAppUrls: false
       defaultEnable: true
+      namespaceSelector:
+        any: true
     ingress:
       main:
         enabled: true
