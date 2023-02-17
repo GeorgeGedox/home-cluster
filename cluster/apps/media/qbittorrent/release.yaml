@@ -72,8 +72,7 @@ spec:
         existingClaim: qbitorrent-config
       downloads:
         enabled: true
-        mountPath: /media
-        path: /mnt/storage/media
+        mountPath: /downloads
+        path: /mnt/storage/media/downloads
         server: "${STORAGE_NAS_IP}"
         type: nfs
-        readOnly: true
