@@ -2,8 +2,12 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
     "config:base",
-    ":assignAndReview(GeorgeGedox)",
-    ":disableRateLimiting"
+    ":disableRateLimiting",
+    "github>GeorgeGedox/home-cluster//.github/renovate/autoMerge.json",
+    "github>GeorgeGedox/home-cluster//.github/renovate/labels.json"
+  ],
+  "schedule": [
+    "every weekend"
   ],
   "dependencyDashboard": true,
   "dependencyDashboardTitle": "[Renovate 🤖] Dependency Dashboard",
@@ -24,15 +28,6 @@
   },
   "regexManagers": [
     {
-      "description": "Process CRD dependencies",
-      "fileMatch": ["cluster/crds/.+\\.ya?ml$"],
-      "matchStrings": [
-        "registryUrl=(?<registryUrl>\\S+) chart=(?<depName>\\S+)\n.*?(?<currentValue>[^-\\s]*)\n",
-        "datasource=(?<datasource>\\S+) image=(?<depName>\\S+)\n.*?-\\s(.*?)\/(?<currentValue>[^/]+)\/[^/]+\n"
-      ],
-      "datasourceTemplate": "{{#if datasource}}{{{datasource}}}{{else}}helm{{/if}}"
-    },
-    {
       "description": "Dependencies from comments",
       "fileMatch": [
         "ansible/.+\\.ya?ml$",
@@ -43,44 +38,6 @@
       ],
       "datasourceTemplate": "{{#if datasource}}{{{datasource}}}{{else}}github-releases{{/if}}",
       "versioningTemplate": "{{#if versioning}}{{{versioning}}}{{else}}semver{{/if}}"
-    }
-  ],
-  "packageRules": [
-    {
-      "matchUpdateTypes": ["major"],
-      "labels": ["type/major"]
-    },
-    {
-      "matchUpdateTypes": ["minor"],
-      "labels": ["type/minor"]
-    },
-    {
-      "matchUpdateTypes": ["patch"],
-      "labels": ["type/patch"]
-    },
-    {
-      "matchDatasources": ["docker"],
-      "addLabels": ["renovate/container"]
-    },
-    {
-      "matchDatasources": ["helm"],
-      "addLabels": ["renovate/helm"]
-    },
-    {
-      "matchDatasources": ["galaxy", "galaxy-collection"],
-      "addLabels": ["renovate/ansible"]
-    },
-    {
-      "matchDatasources": ["terraform-provider"],
-      "addLabels": ["renovate/terraform"]
-    },
-    {
-      "matchDatasources": ["github-releases", "github-tags"],
-      "addLabels": ["renovate/github-release"]
-    },
-    {
-      "matchManagers": ["github-actions"],
-      "addLabels": ["renovate/github-action"]
     }
   ]
 }
