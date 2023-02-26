@@ -5,7 +5,6 @@
       "description": "Auto merge patch updates",
       "automerge": true,
       "matchCurrentVersion": "!/^0/",
-      "automergeType": "branch",
       "matchUpdateTypes": ["patch"]
     }
   ]
