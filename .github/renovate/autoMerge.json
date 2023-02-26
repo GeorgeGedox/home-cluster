@@ -4,6 +4,7 @@
     {
       "description": "Auto merge patch updates",
       "automerge": true,
+      "ignoreTests": true,
       "matchCurrentVersion": "!/^0/",
       "matchUpdateTypes": ["patch"]
     }
