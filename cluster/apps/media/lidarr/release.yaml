@@ -37,7 +37,7 @@ spec:
       enableVideoScript: false
       configureLidarrWithOptimalSettings: true
       audioFormat: native
-      audioBitrate: lossless
+      audioBitrate: high
       requireQuality: true
       enableReplaygainTags: true
       audioLyricType: both
