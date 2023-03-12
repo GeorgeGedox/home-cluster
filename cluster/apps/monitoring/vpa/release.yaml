@@ -41,9 +41,6 @@ spec:
         requests:
           cpu: 15m
           memory: 105M
-        limits:
-          cpu: 15m
-          memory: 105M
     updater:
       enabled: false
     admissionController:

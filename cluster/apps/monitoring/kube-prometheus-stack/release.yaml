@@ -30,6 +30,7 @@ spec:
     - name: longhorn
       namespace: longhorn-system
   values:
+    cleanPrometheusOperatorObjectNames: true
     kubeControllerManager:
       enabled: true
       endpoints: ["192.168.1.10", "192.168.1.11", "192.168.1.12"]
@@ -54,11 +55,11 @@ spec:
     prometheusOperator:
       resources:
         requests:
-          cpu: 15m
-          memory: 110M
+          cpu: 25m
+          memory: 250Mi
         limits:
-          cpu: 15m
-          memory: 110M
+          cpu: 50m
+          memory: 400Mi
     prometheus-node-exporter:
       resources:
         requests:
@@ -97,8 +98,12 @@ spec:
         ruleSelectorNilUsesHelmValues: false
         serviceMonitorSelectorNilUsesHelmValues: false
         walCompression: true
-        retention: 10d
-        retentionSize: "8GB"
+        retention: 7d
+        retentionSize: "9GB"
+        resources:
+          requests:
+            cpu: 150m
+            memory: 3500Mi
         storageSpec:
           volumeClaimTemplate:
             spec:
@@ -189,4 +194,4 @@ spec:
               storageClassName: longhorn
               resources:
                 requests:
-                  storage: 1Gi
+                  storage: 100Mi
