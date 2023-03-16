@@ -1,6 +1,6 @@
 terraform {
   cloud {
-    organization = "georgev"
+    organization = "examen1996"
 
     workspaces {
       name = "home-cluster"

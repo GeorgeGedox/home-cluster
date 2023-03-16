@@ -6,7 +6,7 @@ tasks:
   init:
     desc: Initialize terraform dependencies
     cmds:
-      - cd terraform/cloudflare && terraform init {{.CLI_ARGS}}
+     # - cd terraform/cloudflare && terraform init {{.CLI_ARGS}}
       - cd terraform/vms && terraform init {{.CLI_ARGS}}
 
   cloudflare:plan:

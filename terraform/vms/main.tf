@@ -3,7 +3,7 @@ data "sops_file" "vms_secrets" {
 }
 
 data "http" "github_keys" {
-  url = "https://github.com/georgegedox.keys"
+  url = "https://github.com/cosminmocan.keys"
 }
 
 provider "proxmox" {
