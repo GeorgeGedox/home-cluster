@@ -40,7 +40,7 @@ resource "proxmox_vm_qemu" "cluster_master" {
 
   disk {
     storage = "ssd"
-    size    = try(each.value.disk_size, "20G")
+    size    = try(each.value.disk_size, "21G")
     type    = "scsi"
     ssd     = 1
     discard = "on"
