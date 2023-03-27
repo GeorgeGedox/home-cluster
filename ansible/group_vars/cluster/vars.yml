@@ -1,7 +1,7 @@
 ---
 # (string) The ARP address kube-vip broadcasts
 # Used to load balance control plane nodes
-kubevip_address: "192.168.1.1"
+kubevip_address: "192.168.1.5"
 
 # CIDR used for calico installation of where to look for nodes
 calico_cidr: "192.168.1.0/24"

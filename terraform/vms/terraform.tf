@@ -1,16 +1,9 @@
 terraform {
-  cloud {
-    organization = "examen1996"
-
-    workspaces {
-      name = "home-cluster"
-    }
-  }
 
   required_providers {
     proxmox = {
       source  = "telmate/proxmox"
-      version = "~> 2.9.11"
+      version = "2.9.11"
     }
 
     sops = {
