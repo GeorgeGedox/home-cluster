@@ -1,6 +1,6 @@
 locals {
   proxmox_target_node     = "coolio"
-  template_name           = "debian-11-template"
+  template_name           = "debian11-template"
   network_gateway         = "192.168.0.1"
   network_subnet_range    = "24"
   vm_master_starting_vmid = 500
@@ -11,7 +11,7 @@ locals {
       ip        = "192.168.1.10"
       cores     = 2
       memory    = 3072
-      disk_size = "20G"
+      disk_size = "30G"
     }
   ]
 
@@ -20,7 +20,7 @@ locals {
       ip        = "192.168.1.20"
       cores     = 2
       memory    = 3072
-      disk_size = "20G"
+      disk_size = "30G"
     }
   ]
 }
