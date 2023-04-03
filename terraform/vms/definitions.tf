@@ -12,18 +12,6 @@ locals {
       cores     = 2
       memory    = 2048
       disk_size = "30G"
-    },
-    {
-      ip        = "192.168.1.11"
-      cores     = 2
-      memory    = 2048
-      disk_size = "30G"
-    },
-    {
-      ip        = "192.168.1.12"
-      cores     = 2
-      memory    = 2048
-      disk_size = "30G"
     }
   ]
 
