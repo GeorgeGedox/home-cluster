@@ -10,7 +10,7 @@ locals {
     {
       ip        = "192.168.1.10"
       cores     = 2
-      memory    = 2048
+      memory    = 3072
       disk_size = "30G"
     }
   ]

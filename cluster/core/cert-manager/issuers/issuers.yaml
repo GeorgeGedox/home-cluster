@@ -10,15 +10,9 @@ spec:
     privateKeySecretRef:
       name: letsencrypt-production
     solvers:
-      - dns01:
-          cloudflare:
-            email: "${SECRET_CLOUDFLARE_EMAIL}"
-            apiKeySecretRef:
-              name: cluster-secrets
-              key: CLOUDFLARE_APIKEY
-        selector:
-          dnsZones:
-            - "${SECRET_DOMAIN}"
+      - http01:
+          ingress:
+            class: traefik
 ---
 apiVersion: cert-manager.io/v1
 kind: ClusterIssuer
@@ -31,12 +25,6 @@ spec:
     privateKeySecretRef:
       name: letsencrypt-staging
     solvers:
-      - dns01:
-          cloudflare:
-            email: "${SECRET_CLOUDFLARE_EMAIL}"
-            apiKeySecretRef:
-              name: cluster-secrets
-              key: CLOUDFLARE_APIKEY
-        selector:
-          dnsZones:
-            - "${SECRET_DOMAIN}"
+      - http01:
+          ingress:
+            class: traefik
