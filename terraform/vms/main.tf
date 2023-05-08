@@ -18,8 +18,8 @@ resource "proxmox_vm_qemu" "cluster_master" {
 
   vmid        = local.vm_master_starting_vmid + index(local.vm_def_master, each.value)
   name        = try(each.value.hostname, "cluster-master-${index(local.vm_def_master, each.value)}")
-  target_node = local.proxmox_target_node
-  clone       = local.template_name
+  target_node = try(each.value.node, "")
+  clone       = try(each.value.template, "")
 
   onboot    = true
   os_type   = "cloud-init"
@@ -39,7 +39,7 @@ resource "proxmox_vm_qemu" "cluster_master" {
   }
 
   disk {
-    storage = "ssd"
+    storage = try(each.value.storage, "local-lvm")
     size    = try(each.value.disk_size, "20G")
     type    = "scsi"
     ssd     = 1
@@ -52,8 +52,8 @@ resource "proxmox_vm_qemu" "cluster_worker" {
 
   vmid        = local.vm_worker_starting_vmid + index(local.vm_def_worker, each.value)
   name        = try(each.value.hostname, "cluster-worker-${index(local.vm_def_worker, each.value)}")
-  target_node = local.proxmox_target_node
-  clone       = local.template_name
+  target_node = try(each.value.node, "")
+  clone       = try(each.value.template, "")
 
   onboot    = true
   os_type   = "cloud-init"
@@ -73,7 +73,7 @@ resource "proxmox_vm_qemu" "cluster_worker" {
   }
 
   disk {
-    storage = "ssd"
+    storage = try(each.value.storage, "local-lvm")
     size    = try(each.value.disk_size, "20G")
     type    = "scsi"
     ssd     = 1

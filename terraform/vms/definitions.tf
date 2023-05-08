@@ -1,6 +1,4 @@
 locals {
-  proxmox_target_node     = "epsilon"
-  template_name           = "debian-11-template"
   network_gateway         = "192.168.0.1"
   network_subnet_range    = "23"
   vm_master_starting_vmid = 500
@@ -12,18 +10,27 @@ locals {
       cores     = 2
       memory    = 8192
       disk_size = "40G"
+      storage   = "ssd"
+      node      = "epsilon"
+      template  = "debian11-template"
     },
     {
       ip        = "192.168.1.11"
       cores     = 4
       memory    = 8192
       disk_size = "40G"
+      storage   = "ssd"
+      node      = "epsilon"
+      template  = "debian11-template"
     },
     {
       ip        = "192.168.1.12"
-      cores     = 2
-      memory    = 8192
+      cores     = 4
+      memory    = 4096
       disk_size = "40G"
+      storage   = "local-lvm"
+      node      = "delta"
+      template  = "debian11-template"
     }
   ]
 
@@ -33,12 +40,36 @@ locals {
       cores     = 4
       memory    = 8192
       disk_size = "40G"
+      storage   = "ssd"
+      node      = "epsilon"
+      template  = "debian11-template"
     },
     {
       ip        = "192.168.1.21"
       cores     = 2
       memory    = 8192
       disk_size = "40G"
+      storage   = "ssd"
+      node      = "epsilon"
+      template  = "debian11-template"
+    },
+    {
+      ip        = "192.168.1.22"
+      cores     = 4
+      memory    = 4096
+      disk_size = "40G"
+      storage   = "local-lvm"
+      node      = "delta"
+      template  = "debian11-template"
+    },
+    {
+      ip        = "192.168.1.23"
+      cores     = 4
+      memory    = 4096
+      disk_size = "40G"
+      storage   = "local-lvm"
+      node      = "delta"
+      template  = "debian11-template"
     }
   ]
 }
