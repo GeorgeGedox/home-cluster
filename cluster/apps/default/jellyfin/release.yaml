@@ -42,6 +42,7 @@ spec:
       supplementalGroups:
         - 44
         - 109
+        - 1000
     service:
       main:
         type: ClusterIP
@@ -70,7 +71,7 @@ spec:
       nfs-media:
         enabled: true
         mountPath: /media
-        path: /mnt/storage/media
+        path: /volume1/media
         server: "${STORAGE_NAS_IP}"
         type: nfs
         readOnly: true
