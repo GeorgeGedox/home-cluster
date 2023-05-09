@@ -42,7 +42,12 @@ spec:
         enabled: true
         type: ClusterIP
         ports:
-          bittorrent:
+          udp:
+            enabled: true
+            port: *port-bt
+            protocol: UDP
+            targetPort: *port-bt
+          tcp:
             enabled: true
             port: *port-bt
             protocol: TCP
@@ -73,6 +78,6 @@ spec:
       downloads:
         enabled: true
         mountPath: /downloads
-        path: /volume1/media/downloads
+        path: "${STORAGE_NAS_MEDIA_PATH}/downloads"
         server: "${STORAGE_NAS_IP}"
         type: nfs

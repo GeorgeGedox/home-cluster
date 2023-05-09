@@ -71,7 +71,7 @@ spec:
       nfs-media:
         enabled: true
         mountPath: /media
-        path: /volume1/media
+        path: "${STORAGE_NAS_MEDIA_PATH}"
         server: "${STORAGE_NAS_IP}"
         type: nfs
         readOnly: true
