@@ -39,20 +39,16 @@ spec:
           http:
             port: *port
       bittorrent:
+        enabled: true
         type: LoadBalancer
         externalIPs: ["${QBITTORRENT_IP}"]
-        enabled: true
         ports:
-          udp:
-            enabled: true
-            port: *port-bt
-            protocol: UDP
-            targetPort: *port-bt
-          tcp:
+          bittorrent:
             enabled: true
             port: *port-bt
             protocol: TCP
             targetPort: *port-bt
+        externalTrafficPolicy: Local
     ingress:
       main:
         enabled: true
