@@ -39,9 +39,8 @@ spec:
           http:
             port: *port
       bittorrent:
-        annotations:
-          metallb.universe.tf/loadBalancerIPs: "${QBITTORRENT_IP}"
-        externalTrafficPolicy: Local
+        type: LoadBalancer
+        externalIPs: ["${QBITTORRENT_IP}"]
         enabled: true
         ports:
           udp:
