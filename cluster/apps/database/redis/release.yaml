@@ -26,9 +26,11 @@ spec:
     keepHistory: false
   values:
     architecture: "standalone"
+    global:
+      redis:
+        password: ${SECRET_REDIS_PASSWORD}
     auth:
-      enabled: false
-      sentinel: false
+      enabled: true
     master:
       persistence:
         enabled: false

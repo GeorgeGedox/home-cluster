@@ -1,0 +1,83 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: authentik
+  namespace: default
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: authentik
+      version: 2023.4.1
+      sourceRef:
+        kind: HelmRepository
+        name: chart-authentik
+        namespace: flux-system
+  install:
+    createNamespace: true
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  uninstall:
+    keepHistory: false
+  dependsOn:
+    - name: redis
+      namespace: database
+    - name: postgresql
+      namespace: database
+  values:
+    authentik:
+      secret_key: ${AUTHENTIK_SECRET_KEY}
+      email:
+        host: ${AUTHENTIK_EMAIL_HOST}
+        port: ${AUTHENTIK_EMAIL_PORT}
+        username: ${AUTHENTIK_EMAIL_USERNAME}
+        password: ${AUTHENTIK_EMAIL_PASSWORD}
+        use_tls: ${AUTHENTIK_EMAIL_USE_TLS}
+        use_ssl: ${AUTHENTIK_EMAIL_USE_SSL}
+        timeout: ${AUTHENTIK_EMAIL_TIMEOUT}
+        from: ${AUTHENTIK_EMAIL_FROM}
+      error_reporting:
+        enabled: true
+      postgresql:
+        host: postgresql.database.svc.cluster.local
+        name: authentik
+        user: postgres
+        password: ${SECRET_POSTGRES_ADMIN_PASS}
+      redis:
+        host: redis-master.database.svc.cluster.local
+        password: ${AUTHENTIK_REDIS_PASSWORD}
+    ingress:
+      enabled: true
+      ingressClassName: "nginx"
+      annotations:
+        hajimari.io/appName: Authentik
+        hajimari.io/icon: ph:password-bold
+        external-dns.alpha.kubernetes.io/target: "${CLOUDFLARE_DDNS_RECORD}"
+      hosts:
+        - &host authentik.${SECRET_DOMAIN}
+      tls:
+        - hosts:
+            - *host
+    serviceAccount:
+      create: true
+    geoip:
+      enabled: true
+      accountId: "${GEOIP_ACCOUNT_ID}"
+      licenseKey: "${GEOIP_LICENSE_KEY}"
+      updateInterval: 24
+    prometheus:
+      serviceMonitor:
+        create: true
+        interval: 60s
+        scrapeTimeout: 30s
+      rules:
+        create: true
+    postgresql:
+      enabled: false
+    redis:
+      enabled: false
