@@ -59,7 +59,10 @@ spec:
         hajimari.io/icon: ph:password-bold
         external-dns.alpha.kubernetes.io/target: "${CLOUDFLARE_DDNS_RECORD}"
       hosts:
-        - &host authentik.${SECRET_DOMAIN}
+        - host: &host authentik.${SECRET_DOMAIN}
+          paths:
+            - path: /
+              pathType: Prefix
       tls:
         - hosts:
             - *host
