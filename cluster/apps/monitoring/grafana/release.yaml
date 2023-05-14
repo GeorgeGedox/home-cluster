@@ -45,6 +45,8 @@ spec:
       auth.generic_oauth:
         name: Authentik
         enabled: true
+        client_id: # Set by env vars
+        client_secret: # Set by env vars
         scopes: "openid email profile"
         auth_url: "https://sso.${SECRET_DOMAIN}/application/o/authorize/"
         token_url: "https://sso.${SECRET_DOMAIN}/application/o/token/"
