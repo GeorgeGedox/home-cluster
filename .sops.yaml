@@ -15,3 +15,8 @@ creation_rules:
     key_groups:
       - age:
           - age1a2c3lk7m069m3mtumw582zjyjaxgev9es7n3yk4phvyd63crxedsnu3agc
+  - path_regex: cluster/config/coredns-config\.sops\.ya?ml
+    encrypted_regex: "^(data)$"
+    key_groups:
+      - age:
+          - age1a2c3lk7m069m3mtumw582zjyjaxgev9es7n3yk4phvyd63crxedsnu3agc
