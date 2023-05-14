@@ -64,6 +64,7 @@ spec:
         check_for_updates: false
       log:
         mode: console
+        filters: auth:debug
       grafana_net:
         url: https://grafana.net
     dashboardProviders:
