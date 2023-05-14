@@ -36,9 +36,23 @@ spec:
       GF_DATE_FORMATS_FULL_DATE: "DD.MM.YYYY hh:mm:ss"
       GF_SECURITY_ALLOW_EMBEDDING: true
       GF_SECURITY_COOKIE_SAMESITE: grafana
-    admin:
-      existingSecret: grafana-admin
+    envFromSecrets:
+      - name: grafana-auth-secrets
     grafana.ini:
+      auth:
+        signout_redirect_url: "https://sso.${SECRET_DOMAIN}/application/o/grafana/end-session/"
+        oauth_auto_login: true
+      auth.generic_oauth:
+        name: Authentik
+        enabled: true
+        scopes: "openid email profile"
+        auth_url: "https://sso.${SECRET_DOMAIN}/application/o/authorize/"
+        token_url: "https://sso.${SECRET_DOMAIN}/application/o/token/"
+        api_url: "https://sso.${SECRET_DOMAIN}/application/o/userinfo/"
+        role_attribute_path: |
+          contains(groups[*], 'Grafana Admins') && 'Admin' || 'Viewer'
+      auth.basic:
+        enabled: false
       server:
         root_url: "https://grafana.${SECRET_DOMAIN}"
       paths:
@@ -73,11 +87,17 @@ spec:
             access: proxy
             url: http://kube-prometheus-stack-prometheus.monitoring.svc.cluster.local:9090
             isDefault: true
+          - name: Alertmanager
+            type: alertmanager
+            access: proxy
+            url: http://kube-prometheus-stack-alertmanager.monitoring.svc.cluster.local:9093
+            jsonData:
+              implementation: prometheus
     dashboards:
       default:
         node-exporter-full:
           gnetId: 1860
-          revision: 29
+          revision: 30
           datasource: Prometheus
         postgresql:
           gnetId: 9628
@@ -95,6 +115,9 @@ spec:
         kubernetes-pods:
           url: https://raw.githubusercontent.com/dotdc/grafana-dashboards-kubernetes/master/dashboards/k8s-views-pods.json
           datasource: Prometheus
+        cert-manager:
+          url: https://raw.githubusercontent.com/monitoring-mixins/website/master/assets/cert-manager/dashboards/cert-manager.json
+          datasource: Prometheus
     sidecar:
       dashboards:
         enabled: true
@@ -111,6 +134,13 @@ spec:
       - grafana-clock-panel
     serviceMonitor:
       enabled: true
+    imageRenderer:
+      enabled: true
+      replicas: 3
+      networkPolicy:
+        limitIngress: false
+      serviceMonitor:
+        enabled: true
     ingress:
       enabled: true
       ingressClassName: "nginx"
