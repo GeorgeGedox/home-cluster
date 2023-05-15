@@ -32,6 +32,7 @@ spec:
   values:
     authentik:
       secret_key: ${AUTHENTIK_SECRET_KEY}
+      avatars: "gravatar,initials"
       email:
         host: ${AUTHENTIK_EMAIL_HOST}
         port: ${AUTHENTIK_EMAIL_PORT}
