@@ -2,7 +2,6 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: authentik-proxy-outpost
-  namespace: default
 spec:
   rules:
     - host: "sso.${SECRET_DOMAIN}"
