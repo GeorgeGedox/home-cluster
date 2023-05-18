@@ -1,16 +1,17 @@
+---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: authentik-proxy-outpost
-  namespace: default
 spec:
   rules:
     - host: "sso.${SECRET_DOMAIN}"
       http:
-        paths: /outpost.goauthentik.io
-        pathType: Prefix
-        backend:
-          service:
-            name: ak-outpost-authentik-embedded-outpost.default.svc.cluster.local
-            port:
-              number: 9000
+        paths:
+          - path: /outpost.goauthentik.io
+            pathType: Prefix
+            backend:
+              service:
+                name: ak-outpost-authentik-embedded-outpost
+                port:
+                  number: 9000
