@@ -27,6 +27,8 @@ spec:
   dependsOn:
     - name: longhorn
       namespace: longhorn-system
+    - name: authentik
+      namespace: security
   values:
     image:
       repository: ghcr.io/onedr0p/qbittorrent
@@ -61,7 +63,7 @@ spec:
           hajimari.io/appName: qBitTorrent
           hajimari.io/icon: material-symbols:cloud-download
           nginx.ingress.kubernetes.io/auth-url: |-
-            http://ak-outpost-authentik-embedded-outpost.default.svc.cluster.local:9000/outpost.goauthentik.io/auth/nginx
+            http://ak-outpost-authentik-embedded-outpost.security.svc.cluster.local:9000/outpost.goauthentik.io/auth/nginx
           nginx.ingress.kubernetes.io/auth-signin: |-
             https://sso.${SECRET_DOMAIN}/outpost.goauthentik.io/start?rd=$escaped_request_uri
           nginx.ingress.kubernetes.io/auth-response-headers: |-
