@@ -7,3 +7,4 @@ resources:
   - lidarr
   - sonarr
   - prowlarr
+  - recyclarr

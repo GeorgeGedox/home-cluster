@@ -13,5 +13,9 @@
     "editor.bracketPairColorization.enabled": true,
     "editor.guides.bracketPairs": "active",
     "editor.hover.delay": 1000,
-    "ansible.python.interpreterPath": ".venv/bin/python"
+    "ansible.python.interpreterPath": ".venv/bin/python",
+    "yaml.customTags": [
+      "!secret scalar",
+      "!env_var scalar"
+    ]
 }
