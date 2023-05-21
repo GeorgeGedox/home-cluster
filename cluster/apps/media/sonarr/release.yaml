@@ -53,7 +53,7 @@ spec:
       api:
         enabled: true
         annotations:
-          hajimari.io/enable: false
+          hajimari.io/enable: "false"
         hosts:
           - host: *host
             paths:
