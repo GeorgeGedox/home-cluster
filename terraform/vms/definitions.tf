@@ -26,7 +26,7 @@ locals {
     {
       ip        = "192.168.1.12"
       cores     = 4
-      memory    = 4096
+      memory    = 8192
       disk_size = "40G"
       storage   = "local-lvm"
       node      = "delta"
@@ -56,7 +56,7 @@ locals {
     {
       ip        = "192.168.1.22"
       cores     = 4
-      memory    = 4096
+      memory    = 8192
       disk_size = "40G"
       storage   = "local-lvm"
       node      = "delta"
@@ -65,7 +65,7 @@ locals {
     {
       ip        = "192.168.1.23"
       cores     = 4
-      memory    = 4096
+      memory    = 8192
       disk_size = "40G"
       storage   = "local-lvm"
       node      = "delta"
