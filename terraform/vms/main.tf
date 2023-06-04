@@ -7,76 +7,69 @@ data "http" "github_keys" {
 }
 
 provider "proxmox" {
-  pm_api_url          = data.sops_file.vms_secrets.data["proxmox_api_url"]
-  pm_api_token_id     = data.sops_file.vms_secrets.data["proxmox_api_id"]
-  pm_api_token_secret = data.sops_file.vms_secrets.data["proxmox_api_token"]
-  pm_tls_insecure     = true
-}
-
-resource "proxmox_vm_qemu" "cluster_master" {
-  for_each = { for vm in local.vm_def_master : vm.ip => vm }
-
-  vmid        = local.vm_master_starting_vmid + index(local.vm_def_master, each.value)
-  name        = try(each.value.hostname, "cluster-master-${index(local.vm_def_master, each.value)}")
-  target_node = try(each.value.node, "")
-  clone       = try(each.value.template, "")
-
-  onboot    = true
-  os_type   = "cloud-init"
-  cpu       = "host"
-  agent     = try(each.value.agent, 1)
-  cores     = try(each.value.cores, 1)
-  sockets   = try(each.value.sockets, 1)
-  memory    = try(each.value.memory, 1024)
-  ipconfig0 = "ip=${each.value.ip}/${local.network_subnet_range},gw=${local.network_gateway}"
-
-  ciuser  = data.sops_file.vms_secrets.data["vm_cloudinit_user"]
-  sshkeys = chomp(data.http.github_keys.response_body)
-
-  network {
-    model  = "virtio"
-    bridge = "vmbr0"
-  }
-
-  disk {
-    storage = try(each.value.storage, "local-lvm")
-    size    = try(each.value.disk_size, "20G")
-    type    = "scsi"
-    ssd     = 1
-    discard = "on"
+  endpoint  = data.sops_file.vms_secrets.data["proxmox_endpoint"]
+  api_token = "${data.sops_file.vms_secrets.data["proxmox_user_id"]}=${data.sops_file.vms_secrets.data["proxmox_user_token"]}"
+  insecure  = true
+  ssh {
+    agent    = true
+    username = data.sops_file.vms_secrets.data["proxmox_ssh_user"]
+    password = data.sops_file.vms_secrets.data["proxmox_ssh_password"]
   }
 }
 
-resource "proxmox_vm_qemu" "cluster_worker" {
-  for_each = { for vm in local.vm_def_worker : vm.ip => vm }
+resource "proxmox_virtual_environment_vm" "cluster_vms" {
+  for_each = { for vm in local.vm_definition : vm.ip => vm }
 
-  vmid        = local.vm_worker_starting_vmid + index(local.vm_def_worker, each.value)
-  name        = try(each.value.hostname, "cluster-worker-${index(local.vm_def_worker, each.value)}")
-  target_node = try(each.value.node, "")
-  clone       = try(each.value.template, "")
+  name        = try(each.value.hostname, "${local.cluster_name}-${index(local.vm_definition, each.value)}-${each.value.type}")
+  description = "Managed by Terraform"
+  tags        = ["terraform", each.value.type, local.cluster_name, each.value.node]
 
-  onboot    = true
-  os_type   = "cloud-init"
-  cpu       = "host"
-  agent     = try(each.value.agent, 1)
-  cores     = try(each.value.cores, 1)
-  sockets   = try(each.value.sockets, 1)
-  memory    = try(each.value.memory, 1024)
-  ipconfig0 = "ip=${each.value.ip}/${local.network_subnet_range},gw=${local.network_gateway}"
+  node_name = try(each.value.node, "")
+  vm_id     = local.vm_starting_vmid + index(local.vm_definition, each.value)
 
-  ciuser  = data.sops_file.vms_secrets.data["vm_cloudinit_user"]
-  sshkeys = chomp(data.http.github_keys.response_body)
+  clone {
+    datastore_id = try(each.value.storage, "local-lvm")
+    retries      = 3
+    vm_id        = each.value.template
+  }
 
-  network {
-    model  = "virtio"
-    bridge = "vmbr0"
+  cpu {
+    type  = "host"
+    cores = try(each.value.cores, 1)
+  }
+
+  memory {
+    dedicated = try(each.value.memory, 1024)
+  }
+
+  // Only enable if template already has qemu agent installed,
+  // otherwise the provider will timeout waiting for the vm to become online
+  agent {
+    enabled = true
   }
 
   disk {
-    storage = try(each.value.storage, "local-lvm")
-    size    = try(each.value.disk_size, "20G")
-    type    = "scsi"
-    ssd     = 1
-    discard = "on"
+    datastore_id = try(each.value.storage, "local-lvm")
+    interface    = "scsi0"
+    size         = try(each.value.disk_size, "10")
+    discard      = each.value.storage_ssd ? "on" : "ignore"
+    file_format  = "raw"
+    ssd          = each.value.storage_ssd
+  }
+
+  initialization {
+    datastore_id = try(each.value.storage, "local-lvm")
+
+    ip_config {
+      ipv4 {
+        address = "${each.value.ip}/${local.network_subnet_range}"
+        gateway = local.network_gateway
+      }
+    }
+
+    user_account {
+      username = data.sops_file.vms_secrets.data["vm_cloudinit_user"]
+      keys     = slice(local.ssh_public_keys, 0, length(local.ssh_public_keys) - 1)
+    }
   }
 }

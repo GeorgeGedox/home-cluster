@@ -17,5 +17,9 @@
     "yaml.customTags": [
       "!secret scalar",
       "!env_var scalar"
-    ]
+    ],
+    "[terraform]": {
+      "editor.defaultFormatter": "hashicorp.terraform",
+      "editor.formatOnSave": true
+    }
 }
