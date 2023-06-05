@@ -31,6 +31,19 @@ spec:
       namespace: database
   values:
     authentik:
+      secret_key: ${AUTHENTIK_SECRET_KEY}
+      avatars: "gravatar,initials"
+      email:
+        host: ${AUTHENTIK_EMAIL_HOST}
+        port: ${AUTHENTIK_EMAIL_PORT}
+        username: ${AUTHENTIK_EMAIL_USERNAME}
+        password: ${AUTHENTIK_EMAIL_PASSWORD}
+        use_tls: ${AUTHENTIK_EMAIL_USE_TLS}
+        use_ssl: ${AUTHENTIK_EMAIL_USE_SSL}
+        timeout: ${AUTHENTIK_EMAIL_TIMEOUT}
+        from: ${AUTHENTIK_EMAIL_FROM}
+      error_reporting:
+        enabled: true
       postgresql:
         host: postgresql.database.svc.cluster.local
         name: authentik
@@ -56,11 +69,11 @@ spec:
             - *host
     serviceAccount:
       create: true
-    geoip:
-      enabled: true
-      accountId: "${GEOIP_ACCOUNT_ID}"
-      licenseKey: "${GEOIP_LICENSE_KEY}"
-      updateInterval: 24
+    # geoip:
+    #   enabled: true
+    #   accountId: "${GEOIP_ACCOUNT_ID}"
+    #   licenseKey: "${GEOIP_LICENSE_KEY}"
+    #   updateInterval: 24
     prometheus:
       serviceMonitor:
         create: true
