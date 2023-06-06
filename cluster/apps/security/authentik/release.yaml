@@ -69,11 +69,11 @@ spec:
             - *host
     serviceAccount:
       create: true
-    # geoip:
-    #   enabled: true
-    #   accountId: "${GEOIP_ACCOUNT_ID}"
-    #   licenseKey: "${GEOIP_LICENSE_KEY}"
-    #   updateInterval: 24
+    geoip:
+      enabled: true
+      accountId: "${GEOIP_ACCOUNT_ID}"
+      licenseKey: "${GEOIP_LICENSE_KEY}"
+      updateInterval: 24
     prometheus:
       serviceMonitor:
         create: true
