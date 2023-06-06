@@ -33,3 +33,4 @@ spec:
       concurrentAutomaticEngineUpgradePerNodeLimit: 1
       defaultDataPath: /mnt/longhorn/
       backupTarget: "nfs://${STORAGE_NAS_IP}:/volume2/cluster-backups"
+      defaultLonghornStaticStorageClass: "longhorn"
