@@ -51,3 +51,5 @@ spec:
       create: true
       impersonationResourceNames: ["admin"]
     logLevel: "debug"
+    podAnnotations:
+      secret.reloader.stakater.com/reload: oidc-auth
