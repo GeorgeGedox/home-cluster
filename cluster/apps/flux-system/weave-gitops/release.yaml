@@ -28,6 +28,7 @@ spec:
     adminUser:
       create: true
       username: admin
+      passwordHash: "$2a$12$ru.vLaI.rACBD.urAEiqbOddY.tLj6DRqpVB1m.KC.b.KEkMhJfwm"
     ingress:
       enabled: true
       ingressClassName: "nginx"
