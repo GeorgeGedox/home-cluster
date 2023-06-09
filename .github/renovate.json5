@@ -6,9 +6,9 @@
     "github>GeorgeGedox/home-cluster//.github/renovate/autoMerge.json",
     "github>GeorgeGedox/home-cluster//.github/renovate/labels.json"
   ],
-  "schedule": [
-    "every weekend"
-  ],
+  // "schedule": [
+  //   "every weekend"
+  // ],
   "dependencyDashboard": true,
   "dependencyDashboardTitle": "[Renovate 🤖] Dependency Dashboard",
   "python": {
