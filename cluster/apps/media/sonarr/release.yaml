@@ -24,9 +24,6 @@ spec:
       retries: 3
   uninstall:
     keepHistory: false
-  dependsOn:
-    - name: postgresql
-      namespace: database
   values:
     image:
       repository: ghcr.io/onedr0p/sonarr-develop
@@ -34,15 +31,6 @@ spec:
     envFrom:
       - secretRef:
           name: sonarr-apikey
-    env:
-      TZ: ${TIMEZONE}
-      SONARR__LOG_LEVEL: info
-      SONARR__APPLICATION_URL: "https://sonarr.${SECRET_DOMAIN}"
-      SONARR__POSTGRES_HOST: "postgresql.database.svc.cluster.local"
-      SONARR__POSTGRES_USER: "postgres"
-      SONARR__POSTGRES_PASSWORD: "${SECRET_POSTGRES_ADMIN_PASS}"
-      SONARR__POSTGRES_MAIN_DB: sonarr
-      SONARR__POSTGRES_LOG_DB: sonarr-logs
     service:
       main:
         ports:
@@ -83,6 +71,9 @@ spec:
       fsGroupChangePolicy: OnRootMismatch
       supplementalGroups: [568]
     persistence:
+      config:
+        enabled: true
+        existingClaim: sonarr-config
       media:
         enabled: true
         mountPath: /media

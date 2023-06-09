@@ -4,3 +4,4 @@ kind: Kustomization
 resources:
   - release.yaml
   - secret.sops.yaml
+  - pvc.yaml
