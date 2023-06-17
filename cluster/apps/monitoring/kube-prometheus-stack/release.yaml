@@ -206,10 +206,10 @@ spec:
                     **{{ .Labels.alertname }} {{ if ne .Labels.severity "" }}({{ .Labels.severity | title }}){{ end }} **
                     {{- if ne .Annotations.description "" }}
                       **Description:** {{ .Annotations.description }}
-                    {{- else if ne .Annotations.summary "" }}
-                      **Summary:** {{ .Annotations.summary }}
                     {{- else if ne .Annotations.message "" }}
                       **Message:** {{ .Annotations.message }}
+                    {{- else if ne .Annotations.summary "" }}
+                      **Summary:** {{ .Annotations.summary }}
                     {{- else }}
                       **Description:** N/A
                     {{- end }}
