@@ -30,8 +30,6 @@ spec:
         requests:
           cpu: 15m
           memory: 105Mi
-        limits:
-          memory: 210M
     dashboard:
       replicaCount: 1
       ingress:
@@ -52,5 +50,3 @@ spec:
         requests:
           cpu: 15m
           memory: 105M
-        limits:
-          memory: 210M
