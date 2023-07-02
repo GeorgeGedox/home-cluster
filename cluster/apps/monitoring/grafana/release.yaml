@@ -170,4 +170,4 @@ spec:
             - *host
     persistence:
       enabled: true
-      existingClain: grafana-pvc
+      size: 4Gi
