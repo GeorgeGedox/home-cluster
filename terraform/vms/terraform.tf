@@ -10,7 +10,7 @@ terraform {
   required_providers {
     proxmox = {
       source  = "bpg/proxmox"
-      version = "0.21.0"
+      version = "0.22.0"
     }
 
     sops = {
@@ -20,7 +20,7 @@ terraform {
 
     http = {
       source  = "hashicorp/http"
-      version = "3.3.0"
+      version = "3.4.0"
     }
   }
 }
