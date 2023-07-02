@@ -169,4 +169,5 @@ spec:
         - hosts:
             - *host
     persistence:
-      enabled: false
+      enabled: true
+      existingClain: grafana-pvc
