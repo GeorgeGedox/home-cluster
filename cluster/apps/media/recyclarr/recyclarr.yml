@@ -5,6 +5,7 @@ sonarr:
     base_url: http://sonarr:8989
     api_key: !env_var SONARR__API_KEY
     delete_old_custom_formats: true
+    replace_existing_custom_formats: true
     quality_definition:
       type: series
     quality_profiles:
@@ -158,8 +159,9 @@ radarr:
     base_url: http://radarr:7878
     api_key: !env_var RADARR__API_KEY
     delete_old_custom_formats: true
+    replace_existing_custom_formats: true
     quality_definition:
-      type: series
+      type: movie
     quality_profiles:
       - name: Remux + WEB 1080p
         reset_unmatched_scores: true
