@@ -41,6 +41,8 @@ spec:
     envFrom:
       - secretRef:
           name: sonarr-apikey
+      - secretRef:
+          name: radarr-apikey
     service:
       main:
         enabled: false
