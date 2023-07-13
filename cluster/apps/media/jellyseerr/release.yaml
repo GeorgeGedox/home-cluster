@@ -54,3 +54,4 @@ spec:
       config:
         enabled: true
         existingClaim: jellyseerr-config
+        mountPath: /app/config
