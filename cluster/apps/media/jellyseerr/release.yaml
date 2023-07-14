@@ -55,3 +55,8 @@ spec:
         enabled: true
         existingClaim: jellyseerr-config
         mountPath: /app/config
+
+    hostAliases:
+      - ip: 192.168.0.202
+        hostnames:
+          - stream.${SECRET_DOMAIN}
