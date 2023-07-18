@@ -42,6 +42,7 @@ spec:
         annotations:
           hajimari.io/appName: Jellyseerr
           hajimari.io/icon: bi:eye-fill
+          external-dns.alpha.kubernetes.io/target: "${CLOUDFLARE_DDNS_RECORD}"
         hosts:
           - host: &host "requests.${SECRET_DOMAIN}"
             paths:
