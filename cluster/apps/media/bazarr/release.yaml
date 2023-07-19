@@ -30,12 +30,6 @@ spec:
       tag: 1.2.3
     env:
       TZ: ${TIMEZONE}
-      POSTGRES_ENABLED: true
-      POSTGRES_HOST: postgresql.database.svc.cluster.local
-      POSTGRES_PORT: 5432
-      POSTGRES_DATABASE: bazarr
-      POSTGRES_USERNAME: postgres
-      POSTGRES_PASSWORD: ${SECRET_POSTGRES_ADMIN_PASS}
     service:
       main:
         ports:
@@ -63,6 +57,9 @@ spec:
       fsGroupChangePolicy: OnRootMismatch
       supplementalGroups: [568]
     persistence:
+      config:
+        enabled: true
+        existingClaim: bazarr-config
       media:
         enabled: true
         mountPath: /media
