@@ -26,7 +26,7 @@ spec:
     keepHistory: false
   values:
     image:
-      repository: linuxserver/bazarr
+      repository: ghcr.io/onedr0p/bazarr
       tag: 1.2.3
     env:
       TZ: ${TIMEZONE}
@@ -36,8 +36,6 @@ spec:
       POSTGRES_DATABASE: bazarr
       POSTGRES_USERNAME: postgres
       POSTGRES_PASSWORD: ${SECRET_POSTGRES_ADMIN_PASS}
-      PUID: 1000
-      PGID: 1000
     service:
       main:
         ports:
@@ -58,6 +56,12 @@ spec:
         tls:
           - hosts:
               - *host
+    podSecurityContext:
+      runAsUser: 1000
+      runAsGroup: 1000
+      fsGroup: 1000
+      fsGroupChangePolicy: OnRootMismatch
+      supplementalGroups: [568]
     persistence:
       media:
         enabled: true
