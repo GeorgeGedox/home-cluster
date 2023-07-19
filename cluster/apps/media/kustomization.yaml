@@ -8,6 +8,7 @@ resources:
   - lidarr
   - sonarr
   - radarr
+  - bazarr
   - prowlarr
   - recyclarr
   - flaresolverr
