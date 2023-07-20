@@ -73,6 +73,8 @@ spec:
         filters: auth:debug
       grafana_net:
         url: https://grafana.net
+      unified_alerting.screenshots:
+        capture: true
     dashboardProviders:
       dashboardproviders.yaml:
         apiVersion: 1
