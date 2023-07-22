@@ -35,6 +35,10 @@ spec:
       enablePostgresUser: true
       postgresPassword: ${SECRET_POSTGRES_ADMIN_PASS}
       database: postgres
+      secretKeys:
+        adminPasswordKey: postgres-password
+        userPasswordKey: postgres-password
+        replicationPasswordKey: replication-password
     primary:
       persistence:
         enabled: true
