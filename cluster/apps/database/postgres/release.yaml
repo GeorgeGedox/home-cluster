@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: postgresql
-      version: 12.6.8
+      version: 12.6.0
       sourceRef:
         kind: HelmRepository
         name: chart-bitnami
@@ -35,10 +35,6 @@ spec:
       enablePostgresUser: true
       postgresPassword: ${SECRET_POSTGRES_ADMIN_PASS}
       database: postgres
-      secretKeys:
-        adminPasswordKey: postgres-password
-        userPasswordKey: postgres-password
-        replicationPasswordKey: replication-password
     primary:
       persistence:
         enabled: true

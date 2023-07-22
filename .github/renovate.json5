@@ -3,7 +3,7 @@
   "extends": [
     "config:base",
     ":disableRateLimiting",
-    "github>GeorgeGedox/home-cluster//.github/renovate/autoMerge.json",
+    // "github>GeorgeGedox/home-cluster//.github/renovate/autoMerge.json", # NO
     "github>GeorgeGedox/home-cluster//.github/renovate/labels.json"
   ],
   "schedule": [
