@@ -7,3 +7,4 @@ resources:
   - goldilocks
   - vpa
   - grafana
+  - umami
