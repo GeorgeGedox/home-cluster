@@ -1,0 +1,25 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+    nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
+  name: bastion-ingress
+  namespace: proxy
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: &host "bastion.${SECRET_DOMAIN}"
+      http:
+        paths:
+          - backend:
+              service:
+                name: bastion-svc # Here you specify the name of the Service traffic must be routed to
+                port:
+                  number: 443
+            path: /
+            pathType: ImplementationSpecific
+  tls:
+    - hosts:
+        - *host
