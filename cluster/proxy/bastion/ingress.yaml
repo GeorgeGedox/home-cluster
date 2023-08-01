@@ -15,7 +15,7 @@ spec:
         paths:
           - backend:
               service:
-                name: bastion-svc # Here you specify the name of the Service traffic must be routed to
+                name: bastion-svc
                 port:
                   number: 443
             path: /
