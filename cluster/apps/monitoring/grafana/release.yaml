@@ -170,7 +170,8 @@ spec:
           datasource: Prometheus
       web:
         nginx:
-          gnetId: 13865
+          gnetId: 12559
+          revision: 14
           datasource: Prometheus
     sidecar:
       dashboards:
