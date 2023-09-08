@@ -134,6 +134,7 @@ spec:
         annotations:
           hajimari.io/appName: Prometheus
           hajimari.io/icon: simple-icons:prometheus
+          nginx.ingress.kubernetes.io/whitelist-source-range: 192.168.0.0/23
         hosts:
           - &pmhost prometheus.${SECRET_DOMAIN}
         tls:
@@ -223,6 +224,7 @@ spec:
         annotations:
           hajimari.io/appName: "Alert Manager"
           hajimari.io/icon: mdi:alert-decagram-outline
+          nginx.ingress.kubernetes.io/whitelist-source-range: 192.168.0.0/23
         hosts:
           - &amhost alertmanager.${SECRET_DOMAIN}
         tls:

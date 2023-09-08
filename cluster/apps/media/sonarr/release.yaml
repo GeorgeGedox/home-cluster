@@ -43,6 +43,7 @@ spec:
         annotations:
           hajimari.io/appName: Sonarr
           hajimari.io/icon: gala:tv
+          nginx.ingress.kubernetes.io/whitelist-source-range: 192.168.0.0/23
         hosts:
           - host: &host "sonarr.${SECRET_DOMAIN}"
             paths:

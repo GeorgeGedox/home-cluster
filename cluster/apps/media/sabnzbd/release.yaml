@@ -49,6 +49,7 @@ spec:
         annotations:
           hajimari.io/appName: SABnzbd
           hajimari.io/icon: material-symbols:cloud-download
+          nginx.ingress.kubernetes.io/whitelist-source-range: 192.168.0.0/23
         hosts:
           - host: &host "sabnzbd.${SECRET_DOMAIN}"
             paths:

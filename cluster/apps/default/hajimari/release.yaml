@@ -48,6 +48,7 @@ spec:
         ingressClassName: nginx
         annotations:
           hajimari.io/enable: "false"
+          nginx.ingress.kubernetes.io/whitelist-source-range: 192.168.0.0/23
         hosts:
           - host: &host apps.${SECRET_DOMAIN}
             paths:

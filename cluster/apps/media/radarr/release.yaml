@@ -66,6 +66,7 @@ spec:
         annotations:
           hajimari.io/appName: Radarr
           hajimari.io/icon: mdi:filmstrip
+          nginx.ingress.kubernetes.io/whitelist-source-range: 192.168.0.0/23
         hosts:
           - host: &host "radarr.${SECRET_DOMAIN}"
             paths:

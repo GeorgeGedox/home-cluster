@@ -38,6 +38,7 @@ spec:
         annotations:
           hajimari.io/appName: Goldilocks
           hajimari.io/icon: mdi:align-vertical-top
+          nginx.ingress.kubernetes.io/whitelist-source-range: 192.168.0.0/23
         hosts:
           - host: &host goldilocks.${SECRET_DOMAIN}
             paths:

@@ -57,6 +57,7 @@ spec:
       annotations:
         hajimari.io/appName: PGAdmin
         hajimari.io/icon: bxl:postgresql
+        nginx.ingress.kubernetes.io/whitelist-source-range: 192.168.0.0/23
       hosts:
         - host: &host pgadmin.${SECRET_DOMAIN}
           paths:
