@@ -8,3 +8,4 @@ resources:
   - vpa
   - grafana
   - umami
+  - loki
