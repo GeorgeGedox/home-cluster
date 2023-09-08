@@ -28,12 +28,6 @@ spec:
     keepHistory: false
   values:
     loki:
-      config:
-        query_scheduler:
-          max_outstanding_requests_per_tenant: 2048
-        query_range:
-          parallelise_shardable_queries: false
-          split_queries_by_interval: 0
       auth_enabled: false
       commonConfig:
         replication_factor: 1
@@ -54,6 +48,8 @@ spec:
       persistence:
         size: 5Gi
         storageClass: longhorn
+    query_scheduler:
+      max_outstanding_requests_per_tenant: 4096
     gateway:
       image:
         registry: ghcr.io
