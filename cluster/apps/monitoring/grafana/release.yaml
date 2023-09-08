@@ -182,6 +182,3 @@ spec:
       tls:
         - hosts:
             - *host
-    persistence:
-      enabled: true
-      size: 4Gi
