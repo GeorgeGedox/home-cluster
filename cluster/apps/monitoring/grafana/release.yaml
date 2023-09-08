@@ -102,6 +102,12 @@ spec:
             url: http://kube-prometheus-stack-alertmanager.monitoring.svc.cluster.local:9093
             jsonData:
               implementation: prometheus
+          - name: Loki
+            type: loki
+            access: proxy
+            url: http://loki-gateway.monitoring.svc.cluster.local
+            jsonData:
+              maxLines: 250
     dashboards:
       default:
         node-exporter-full:
@@ -127,6 +133,7 @@ spec:
         cert-manager:
           url: https://raw.githubusercontent.com/monitoring-mixins/website/master/assets/cert-manager/dashboards/cert-manager.json
           datasource: Prometheus
+      flux:
         flux-cluster:
           url: https://raw.githubusercontent.com/fluxcd/flux2/main/manifests/monitoring/monitoring-config/dashboards/cluster.json
           datasource: Prometheus
@@ -135,6 +142,10 @@ spec:
           datasource: Prometheus
         flux-logs:
           url: https://raw.githubusercontent.com/fluxcd/flux2/main/manifests/monitoring/monitoring-config/dashboards/logs.json
+          datasource: Prometheus
+      web:
+        nginx:
+          gnetId: 13865
           datasource: Prometheus
     sidecar:
       dashboards:

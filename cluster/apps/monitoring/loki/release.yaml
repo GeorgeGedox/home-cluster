@@ -51,8 +51,7 @@ spec:
         enabled: true
         ingressClassName: nginx
         annotations:
-          hajimari.io/appName: Loki
-          hajimari.io/icon: carbon:flow-logs-vpc
+          hajimari.io/enable: "false"
           nginx.ingress.kubernetes.io/whitelist-source-range: 192.168.0.0/23
         hosts:
           - host: &host "loki.${SECRET_DOMAIN}"
