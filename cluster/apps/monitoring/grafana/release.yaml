@@ -35,7 +35,6 @@ spec:
     env:
       GF_EXPLORE_ENABLED: true
       GF_PANELS_DISABLE_SANITIZE_HTML: true
-      GF_LOG_FILTERS: rendering:debug
       GF_DATE_FORMATS_FULL_DATE: "DD.MM.YYYY hh:mm:ss"
       GF_SECURITY_ALLOW_EMBEDDING: true
       GF_SECURITY_COOKIE_SAMESITE: grafana
@@ -68,11 +67,11 @@ spec:
         provisioning: /etc/grafana/provisioning
       analytics:
         check_for_updates: false
+        reporting_enabled: false
+      news:
+        news_feed_enabled: false
       log:
         mode: console
-        filters: auth:debug
-      grafana_net:
-        url: https://grafana.net
       unified_alerting.screenshots:
         capture: true
     dashboardProviders:
@@ -142,6 +141,10 @@ spec:
           gnetId: 9628
           revision: 7
           datasource: Prometheus
+        nut:
+          gnetId: 19308
+          revision: 2
+          datasource: Prometheus
         cert-manager:
           url: https://raw.githubusercontent.com/monitoring-mixins/website/master/assets/cert-manager/dashboards/cert-manager.json
           datasource: Prometheus
@@ -177,12 +180,6 @@ spec:
       dashboards:
         enabled: true
         searchNamespace: ALL
-        labelValue: ""
-        label: grafana_dashboard
-        folderAnnotation: grafana_folder
-        provider:
-          disableDelete: true
-          foldersFromFilesStructure: true
       datasources:
         enabled: true
         searchNamespace: ALL
@@ -214,3 +211,6 @@ spec:
       tls:
         - hosts:
             - *host
+    persistence:
+      enabled: true
+      existingClaim: grafana-config
