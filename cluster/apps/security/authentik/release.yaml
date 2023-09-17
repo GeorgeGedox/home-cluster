@@ -47,6 +47,8 @@ spec:
         name: authentik
         user: postgres
         password: ${SECRET_POSTGRES_ADMIN_PASS}
+      redis:
+        host: "{{ .Release.Name }}-redis-master"
       geoip:
         enabled: true
         accountId: "${GEOIP_ACCOUNT_ID}"
