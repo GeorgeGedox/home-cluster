@@ -25,8 +25,6 @@ spec:
   uninstall:
     keepHistory: false
   dependsOn:
-    - name: redis
-      namespace: database
     - name: postgresql
       namespace: database
   values:
@@ -49,9 +47,12 @@ spec:
         name: authentik
         user: postgres
         password: ${SECRET_POSTGRES_ADMIN_PASS}
-      redis:
-        host: redis-master.database.svc.cluster.local
-        password: ${SECRET_REDIS_PASSWORD}
+      geoip:
+        enabled: true
+        accountId: "${GEOIP_ACCOUNT_ID}"
+        licenseKey: "${GEOIP_LICENSE_KEY}"
+        editionIds: "GeoLite2-City"
+        updateInterval: 24
     ingress:
       enabled: true
       ingressClassName: "nginx"
@@ -79,4 +80,8 @@ spec:
     postgresql:
       enabled: false
     redis:
-      enabled: false
+      enabled: true
+      metrics:
+        enabled: true
+        serviceMonitor:
+          enabled: true
