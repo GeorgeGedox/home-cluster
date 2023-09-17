@@ -49,12 +49,6 @@ spec:
         password: ${SECRET_POSTGRES_ADMIN_PASS}
       redis:
         host: "{{ .Release.Name }}-redis-master"
-      geoip:
-        enabled: true
-        accountId: "${GEOIP_ACCOUNT_ID}"
-        licenseKey: "${GEOIP_LICENSE_KEY}"
-        editionIds: "GeoLite2-City"
-        updateInterval: 24
     ingress:
       enabled: true
       ingressClassName: "nginx"
@@ -72,6 +66,13 @@ spec:
             - *host
     serviceAccount:
       create: true
+    volumes:
+      - name: media
+        persistentVolumeClaim:
+          claimName: authentik-media
+    volumeMounts:
+      - name: media
+        mountPath: /media
     prometheus:
       serviceMonitor:
         create: true
