@@ -28,6 +28,8 @@ spec:
     - name: postgresql
       namespace: database
   values:
+    securityContext:
+      fsGroup: 1000
     authentik:
       secret_key: ${AUTHENTIK_SECRET_KEY}
       avatars: "gravatar,initials"
