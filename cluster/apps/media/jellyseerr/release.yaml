@@ -58,6 +58,6 @@ spec:
         mountPath: /app/config
 
     hostAliases:
-      - ip: 192.168.0.202
+      - ip: 192.168.0.203
         hostnames:
           - stream.${SECRET_DOMAIN}
