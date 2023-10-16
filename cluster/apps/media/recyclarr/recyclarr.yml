@@ -10,9 +10,11 @@ sonarr:
       type: series
     quality_profiles:
       - name: WEB-1080p
-        reset_unmatched_scores: true
+        reset_unmatched_scores:
+          enabled: true
       - name: Remux-1080p - Anime
-        reset_unmatched_scores: true
+        reset_unmatched_scores:
+          enabled: true
     custom_formats:
       # SHOWS ===============================================
       - trash_ids:
@@ -164,9 +166,11 @@ radarr:
       type: movie
     quality_profiles:
       - name: Remux + WEB 1080p
-        reset_unmatched_scores: true
+        reset_unmatched_scores:
+          enabled: true
       - name: Remux-1080p - Anime
-        reset_unmatched_scores: true
+        reset_unmatched_scores:
+          enabled: true
     custom_formats:
       - trash_ids:
           # Movie Versions
