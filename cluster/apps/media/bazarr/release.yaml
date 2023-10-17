@@ -40,12 +40,12 @@ spec:
       main:
         pod:
           securityContext:
-          runAsUser: 1000
-          runAsGroup: 1000
-          fsGroup: 1000
-          fsGroupChangePolicy: OnRootMismatch
-          supplementalGroups:
-            - 568
+            runAsUser: 1000
+            runAsGroup: 1000
+            fsGroup: 1000
+            fsGroupChangePolicy: OnRootMismatch
+            supplementalGroups:
+              - 568
         containers:
           main:
             image:
@@ -61,7 +61,6 @@ spec:
             port: 6767
     ingress:
       main:
-        enabled: true
         className: nginx
         annotations:
           hajimari.io/appName: Bazarr
@@ -72,16 +71,18 @@ spec:
             paths:
               - path: /
                 pathType: Prefix
+                service:
+                  name: main
+                  port: http
         tls:
           - hosts:
               - *host
     persistence:
       config:
-        enabled: true
         existingClaim: bazarr-config
       media:
-        enabled: true
-        mountPath: /media
+        globalMounts:
+          - path: /media
         path: "${STORAGE_NAS_MEDIA_PATH}"
         server: "${STORAGE_NAS_IP}"
         type: nfs
