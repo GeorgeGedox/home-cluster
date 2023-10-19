@@ -80,7 +80,12 @@ spec:
               - *host
     persistence:
       config:
+        enabled: true
         existingClaim: bazarr-config
+        advancedMounts:
+          main:
+            main:
+              - path: /config
       media:
         globalMounts:
           - path: /media
