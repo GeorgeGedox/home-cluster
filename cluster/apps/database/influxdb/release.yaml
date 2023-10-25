@@ -51,4 +51,4 @@ spec:
       annotations:
         hajimari.io/appName: InfluxDB
         hajimari.io/icon: devicon:influxdb
-      hostname: "dns.${SECRET_DOMAIN}"
+      hostname: "influxdb.${SECRET_DOMAIN}"
