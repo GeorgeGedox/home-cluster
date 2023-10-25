@@ -50,5 +50,6 @@ spec:
       ingressClassName: nginx
       annotations:
         hajimari.io/appName: InfluxDB
-        hajimari.io/icon: devicon:influxdb
+        hajimari.io/icon: simple-icons:influxdb
       hostname: "influxdb.${SECRET_DOMAIN}"
+      tls: true
