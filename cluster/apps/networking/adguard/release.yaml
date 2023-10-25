@@ -24,6 +24,9 @@ spec:
       retries: 3
   uninstall:
     keepHistory: false
+  dependsOn:
+    - name: longhorn
+      namespace: longhorn-system
   values:
     image:
       repository: adguard/adguardhome
@@ -48,7 +51,7 @@ spec:
         enabled: true
         annotations:
           hajimari.io/appName: AdGuard Home
-          hajimari.io/icon: adguard-home
+          hajimari.io/icon: cib:adguard
           nginx.ingress.kubernetes.io/whitelist-source-range: 192.168.0.0/23
           nginx.ingress.kubernetes.io/auth-url: |-
             http://authentik.security.svc.cluster.local/outpost.goauthentik.io/auth/nginx

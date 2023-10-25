@@ -1,0 +1,54 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: influxdb
+  namespace: database
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: influxdb2
+      version: 2.1.1
+      sourceRef:
+        kind: HelmRepository
+        name: chart-influxdata
+        namespace: flux-system
+  maxHistory: 3
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  uninstall:
+    keepHistory: false
+  dependsOn:
+    - name: longhorn
+      namespace: longhorn-system
+  values:
+    fullnameOverride: influxdb2
+    image:
+      repository: influxdb
+      tag: 2.7.3-alpine
+    pdb:
+      create: false
+    adminUser:
+      organization: "prod0"
+      user: "admin"
+      retention_policy: "0s"
+      bucket: "default"
+      password: "${SECRET_INFLUXDB_ADMIN_PASS}"
+      token: "${SECRET_INFLUXDB_ADMIN_TOKEN}"
+    persistence:
+      enabled: true
+      useExisting: true
+      name: influxdb-data
+    ingress:
+      enabled: true
+      ingressClassName: nginx
+      annotations:
+        hajimari.io/appName: InfluxDB
+        hajimari.io/icon: devicon:influxdb
+      hostname: "dns.${SECRET_DOMAIN}"
