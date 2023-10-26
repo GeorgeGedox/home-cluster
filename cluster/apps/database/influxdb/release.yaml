@@ -32,14 +32,20 @@ spec:
       repository: "influxdb"
       tag: "1.8.10-alpine"
       pullPolicy: IfNotPresent
+    service:
+      type: LoadBalancer
+      annotations:
+        metallb.universe.tf/loadBalancerIPs: "${INFLUXDB_LB_IP}"
+      externalIPs: ["${INFLUXDB_LB_IP}"]
+      externalTrafficPolicy: Local
+    setDefaultUser:
+      enabled: true
+      user:
+        username: "admin"
+        password: "${SECRET_INFLUXDB_ADMIN_PASS}"
     persistence:
       enabled: true
       existingClaim: influxdb-data
       name: influxdb-data
     ingress:
-      enabled: true
-      tls: true
-      annotations:
-        hajimari.io/enable: "false"
-      hostname: "influx.${SECRET_DOMAIN}"
-      className: nginx
+      enabled: false
