@@ -38,11 +38,6 @@ spec:
         metallb.universe.tf/loadBalancerIPs: "${INFLUXDB_LB_IP}"
       externalIPs: ["${INFLUXDB_LB_IP}"]
       externalTrafficPolicy: Local
-    setDefaultUser:
-      enabled: true
-      user:
-        username: "admin"
-        password: "${SECRET_INFLUXDB_ADMIN_PASS}"
     persistence:
       enabled: true
       existingClaim: influxdb-data
