@@ -131,6 +131,14 @@ spec:
             url: http://loki-gateway.monitoring.svc.cluster.local
             jsonData:
               maxLines: 250
+          - name: InfluxDB_v1
+            type: influxdb
+            access: proxy
+            user: admin
+            url: http://influxdb.database.svc.cluster.local:8086
+            jsonData:
+              dbName: geoip2influx
+              httpMode: POST
     dashboards:
       default:
         node-exporter-full:
@@ -173,8 +181,12 @@ spec:
           datasource: Prometheus
       web:
         nginx:
-          gnetId: 12559
-          revision: 14
+          gnetId: 9614
+          revision: 1
+          datasource: Prometheus
+        swag:
+          gnetId: 12268
+          revision: 17
           datasource: Prometheus
     sidecar:
       dashboards:
