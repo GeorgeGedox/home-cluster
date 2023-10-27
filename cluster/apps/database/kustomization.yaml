@@ -6,4 +6,4 @@ resources:
   - postgres
   - pgadmin
   - influxdb2
-  - influxdb
+  # - influxdb
