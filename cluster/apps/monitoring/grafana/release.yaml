@@ -30,8 +30,6 @@ spec:
     - name: authentik
       namespace: security
   values:
-    rbac:
-      pspEnabled: false
     env:
       GF_EXPLORE_ENABLED: true
       GF_PANELS_DISABLE_SANITIZE_HTML: true
@@ -139,6 +137,8 @@ spec:
             jsonData:
               dbName: geoip2influx
               httpMode: POST
+            secureJsonData:
+              password: "${SECRET_INFLUXDB_ADMIN_PASS}"
     dashboards:
       default:
         node-exporter-full:
@@ -187,7 +187,7 @@ spec:
         swag:
           gnetId: 12268
           revision: 17
-          datasource: Prometheus
+          datasource: InfluxDB_v1
     sidecar:
       dashboards:
         enabled: true
@@ -206,7 +206,7 @@ spec:
       enabled: true
     imageRenderer:
       enabled: true
-      replicas: 3
+      replicas: 2
       networkPolicy:
         limitIngress: false
       serviceMonitor:
