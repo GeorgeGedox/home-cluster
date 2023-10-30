@@ -55,6 +55,7 @@ spec:
         proxy-body-size: "100M"
         ssl-protocols: "TLSv1.3 TLSv1.2"
         use-forwarded-headers: "true"
+        use-proxy-protocol: "true"
         log-format-escape-json: "true"
         log-format-upstream: >-
           {"time": "$time_iso8601", "remote_addr": "$proxy_protocol_addr",
@@ -67,7 +68,7 @@ spec:
       extraArgs:
         default-ssl-certificate: "networking/${SECRET_DOMAIN/./-}-production-tls"
       metrics:
-        enabled: false
+        enabled: true
       resources:
         requests:
           memory: 200Mi

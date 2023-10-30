@@ -180,7 +180,7 @@ spec:
           url: https://raw.githubusercontent.com/fluxcd/flux2/main/manifests/monitoring/monitoring-config/dashboards/logs.json
           datasource: Prometheus
       web:
-        nginx:
+        nginx_ingress:
           gnetId: 9614
           revision: 1
           datasource: Prometheus
