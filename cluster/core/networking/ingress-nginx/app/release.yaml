@@ -68,6 +68,11 @@ spec:
         default-ssl-certificate: "networking/${SECRET_DOMAIN/./-}-production-tls"
       metrics:
         enabled: true
+        serviceMonitor:
+          enabled: true
+          namespace: default
+          namespaceSelector:
+            any: true
       resources:
         requests:
           memory: 200Mi
