@@ -30,7 +30,7 @@ spec:
         pullPolicy: IfNotPresent
       ingress:
         enabled: true
-        className: nginx
+        ingressClassName: nginx
         annotations:
           hajimari.io/icon: logos:kubernetes
           hajimari.io/appName: Kube Dashboard
