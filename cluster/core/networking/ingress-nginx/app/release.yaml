@@ -9,20 +9,20 @@ spec:
   chart:
     spec:
       chart: ingress-nginx
-      version: 4.7.2
+      version: 4.8.3
       sourceRef:
         kind: HelmRepository
         name: chart-ingress-nginx
         namespace: flux-system
-  maxHistory: 3
+  maxHistory: 0
   install:
     createNamespace: true
     remediation:
-      retries: 3
+      retries: 0
   upgrade:
     cleanupOnFail: true
     remediation:
-      retries: 3
+      retries: 0
   uninstall:
     keepHistory: false
   dependsOn:
