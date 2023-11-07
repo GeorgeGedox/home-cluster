@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: ingress-nginx
-      version: 4.8.3
+      version: 4.7.2
       sourceRef:
         kind: HelmRepository
         name: chart-ingress-nginx
@@ -18,11 +18,11 @@ spec:
   install:
     createNamespace: true
     remediation:
-      retries: 0
+      retries: 3
   upgrade:
     cleanupOnFail: true
     remediation:
-      retries: 0
+      retries: 3
   uninstall:
     keepHistory: false
   dependsOn:
@@ -44,6 +44,7 @@ spec:
       ingressClassResource:
         default: true
       config:
+        allow-snippet-annotations: "true"
         client-header-timeout: 120
         client-body-buffer-size: "100M"
         client-body-timeout: 120
