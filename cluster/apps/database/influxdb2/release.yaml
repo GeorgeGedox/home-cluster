@@ -31,7 +31,7 @@ spec:
     fullnameOverride: influxdb2
     image:
       repository: influxdb
-      tag: 2.7.3-alpine
+      tag: 2.7.11-alpine
     pdb:
       create: false
     adminUser:
