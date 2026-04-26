@@ -100,3 +100,13 @@ spec:
         path: "${STORAGE_NAS_MEDIA_PATH}/downloads"
         server: "${STORAGE_NAS_IP}"
         type: nfs
+    affinity:
+      nodeAffinity:
+        preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 1
+            preference:
+              matchExpressions:
+                - key: node-type
+                  operator: In
+                  values:
+                    - performance
