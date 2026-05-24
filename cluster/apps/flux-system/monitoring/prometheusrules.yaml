@@ -22,7 +22,7 @@ spec:
               {{ $labels.kind }} {{ $labels.namespace }}/{{ $labels.name }} reconciliation
               has been failing for more than 15 minutes.
           expr: |
-            max(gotk_reconcile_condition{status="False",type="Ready"}) by (namespace, name, kind)
+            max(gotk_reconcile_condition{status="False",type="Ready",name!="chart-kube-dashboard"}) by (namespace, name, kind)
               +
             on(namespace, name, kind) (max(gotk_reconcile_condition{status="Deleted"})
               by (namespace, name, kind)) * 2 == 1
