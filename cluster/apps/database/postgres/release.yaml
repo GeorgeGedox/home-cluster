@@ -28,6 +28,8 @@ spec:
     - name: longhorn
       namespace: longhorn-system
   values:
+    image:
+      repository: bitnamilegacy/postgresql
     auth:
       enablePostgresUser: true
       postgresPassword: ${SECRET_POSTGRES_ADMIN_PASS}
