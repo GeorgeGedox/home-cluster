@@ -40,6 +40,8 @@ spec:
         existingClaim: postgresql-data
     metrics:
       enabled: true
+      image:
+        repository: bitnamilegacy/postgres-exporter
       serviceMonitor:
         enabled: true
       prometheusRule:
