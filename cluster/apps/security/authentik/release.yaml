@@ -86,7 +86,10 @@ spec:
       enabled: false
     redis:
       enabled: true
+      image:
+        tag: 6.2.10-debian-11-r13
+        repository: bitnamilegacy/redis
       metrics:
-        enabled: true
+        enabled: false
         serviceMonitor:
-          enabled: true
+          enabled: false
